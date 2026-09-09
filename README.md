@@ -16,6 +16,15 @@
   - README·파일 수정 검증
   - 직접 Release 수정 액션이 없을 때 GitHub Actions + REST API를 사용하는 일회용 우회 방식
 
+### Codex 한글화 프로젝트 운영
+
+- [Codex 한글화 프로젝트 부트스트랩](CODEX-LOCALIZATION-BOOTSTRAP.md)
+  - 게임별 프로젝트·검수 프로그램 분리
+  - GPT-5.6 Sol / Luna 역할 분담
+  - Google Drive 기반 1차·2차·3차 검수 구조
+  - 용어집·캐릭터·관계도·말투 기준 자료 운영
+  - 최종 CSV 반영과 실제 플레이 피드백 우선순위
+
 ### Nintendo Switch 한국어 패치
 
 - [Nintendo Switch 게임 한국어 패치 제작 워크플로](switch/SWITCH-KOREAN-LOCALIZATION-GUIDE.md)
