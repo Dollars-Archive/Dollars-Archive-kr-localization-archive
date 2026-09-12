@@ -48,7 +48,7 @@ speaker_id,listener_id,relationship,speech_level,address_rule,effective_from,eff
 character_id,base_style,sentence_length,vocabulary_tendency,emotional_expression,avoid,approved_examples,notes
 ```
 
-### ゲーム별 출력 규격 `layout_profile`
+### 게임별 출력 규격 `layout_profile`
 
 파일명·포맷은 프로젝트의 기존 구조를 따릅니다. JSON 등 별도 기준 파일로 관리할 수 있으며 검수 CSV에 새 필수 컬럼을 강제하지 않습니다.
 
