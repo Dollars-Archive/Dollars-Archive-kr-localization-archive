@@ -79,13 +79,17 @@ if (Test-Path $AgentsFile) { Copy-Item -Force $AgentsFile "$AgentsFile.backup-$S
 $EscStart = [regex]::Escape($Start)
 $EscEnd = [regex]::Escape($End)
 $Pattern = "$EscStart[\s\S]*?$EscEnd"
+$StartCount = [regex]::Matches($OldAgents, $EscStart).Count
+$EndCount = [regex]::Matches($OldAgents, $EscEnd).Count
 
-if ([regex]::Matches($OldAgents, $EscStart).Count -gt 1 -or [regex]::Matches($OldAgents, $EscEnd).Count -gt 1) {
-    throw "Multiple managed localization blocks found in $AgentsFile. Inspect before reinstalling."
+if ($StartCount -ne $EndCount -or $StartCount -gt 1) {
+    throw "Malformed or duplicate managed localization block in $AgentsFile. Inspect before reinstalling."
 }
 
-if ($OldAgents -match $Pattern) {
-    $NewAgents = [regex]::Replace($OldAgents, $Pattern, [System.Text.RegularExpressions.MatchEvaluator]{ param($m) $Block }, 1)
+if ($StartCount -eq 1) {
+    $ManagedRegex = New-Object System.Text.RegularExpressions.Regex($Pattern)
+    $Evaluator = [System.Text.RegularExpressions.MatchEvaluator]{ param($m) $Block }
+    $NewAgents = $ManagedRegex.Replace($OldAgents, $Evaluator, 1)
 } elseif ([string]::IsNullOrWhiteSpace($OldAgents)) {
     $NewAgents = $Block + [Environment]::NewLine
 } else {
@@ -100,6 +104,7 @@ $VerifySkill = [System.IO.File]::ReadAllText($SkillFile)
 $VerifySnapshot = [System.IO.File]::ReadAllText($SnapshotFile)
 
 if ([regex]::Matches($VerifyAgents, $EscStart).Count -ne 1) { throw 'Global AGENTS managed block verification failed.' }
+if ([regex]::Matches($VerifyAgents, $EscEnd).Count -ne 1) { throw 'Global AGENTS managed block end marker verification failed.' }
 if ($VerifyAgents -notmatch [regex]::Escape($SkillFile)) { throw 'Installed skill path is missing from global AGENTS.' }
 if ($VerifySkill -notmatch 'dollars-localization-bootstrap') { throw 'Installed skill verification failed.' }
 if ($VerifySnapshot -notmatch 'Codex 한글화 프로젝트 부트스트랩') { throw 'Bootstrap snapshot verification failed.' }
