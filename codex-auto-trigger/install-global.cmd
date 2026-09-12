@@ -9,5 +9,5 @@ if not "%ERR%"=="0" (
   exit /b %ERR%
 )
 echo.
-echo Installation completed. Start a new Codex session and say: 한글화 작업할 거야
+echo Installation completed. Start a new Codex session and make your normal localization request.
 pause
