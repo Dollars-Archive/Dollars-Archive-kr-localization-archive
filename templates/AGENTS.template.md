@@ -213,6 +213,8 @@ Luna에는 새로운 아키텍처, 애매한 바이너리 추론, 불명확한 �
 
 Web GPT는 최종 작업 수행자로 호출합니다. 별도 지시 없이 Oracle/다른 GPT를 재호출하거나 호스트 완료를 기다리지 않습니다.
 
+Web Sol XHIGH 파일 작업에는 아카이브의 `workflow/WEB-SOL-DEVSPACE-OPERATING-CONTRACT.md`를 적용합니다. `gpt-5.6-sol / extra-high / select`의 실제 웹 선택·DevSpace 읽기·생성·기존 파일 수정·재읽기 경로는 검증된 범위로 취급하되, 삭제·이동·이름 변경은 기본 금지합니다. Latest가 기본 예시라는 이유만으로 Sol 미지원이라고 추정하거나 로컬 Codex Sol XHIGH로 임의 대체하지 않습니다.
+
 역할 혼동·자기 재호출·호스트 대기·중첩 락·무의미한 반환은 동일 미션 자동 위임을 1회에서 종료하고 manual handoff로 전환합니다.
 
 DevSpace `502` / `network_error`는 별도 연결 장애 규칙에 따라 최소 1분 간격 최대 5회 재시도합니다.

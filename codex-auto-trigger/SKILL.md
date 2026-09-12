@@ -64,5 +64,6 @@ Raw source:
 
 - 사용자가 별도로 요청하지 않은 HD Pack 제작을 자동 시작하지 않습니다.
 - Web GPT / DevSpace / Oracle 위임은 canonical bootstrap의 최신 안전장치를 그대로 따릅니다.
+- Web GPT-5.6 Sol XHIGH 실무 배차가 관련되면 canonical repo의 `workflow/WEB-SOL-DEVSPACE-OPERATING-CONTRACT.md`도 읽습니다. Latest 기본 예시만으로 Sol 미지원이라고 단정하지 않으며, 삭제·이동·이름 변경은 검증된 기본 쓰기 범위에 포함하지 않습니다.
 - 모델 호출이나 연결을 실제로 수행하지 않았다면 수행했다고 보고하지 않습니다.
 - 실제 프로젝트 상태와 테스트를 확인하기 전에는 완료로 판단하지 않습니다.

@@ -351,6 +351,8 @@ Astra급 접근으로도 원인이 설명되지 않거나 기존 가정을 처�
 
 DevSpace는 최고난도 문제에서만 쓰는 비상 경로가 아니라, **Web GPT-5.6 Sol XHIGH를 기본 전문 실무 책임자로 쓰기 위한 일반 실무 경로**이기도 합니다.
 
+Web Sol XHIGH를 실제 파일 작업에 사용할 때는 `workflow/WEB-SOL-DEVSPACE-OPERATING-CONTRACT.md`도 읽습니다. 현재 사용자 환경에서는 Oracle 0.20.0의 `gpt-5.6-sol / extra-high / select` 경로가 실제 웹 UI 선택, DevSpace 파일 읽기·생성·기존 파일 정밀 수정·재읽기·결과 회수까지 검증됐습니다. **Latest 기본 설명만으로 미지원이라 추정하지 않으며, 삭제·이동·이름 변경은 검증된 쓰기 범위에 포함하지 않습니다.**
+
 Web Sol XHIGH 또는 Web GPT-6 Pro에 프로젝트 작업을 맡길 때 연결 상태를 추측하지 않습니다.
 
 ## 기본 순서

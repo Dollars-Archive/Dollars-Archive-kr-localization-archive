@@ -165,6 +165,8 @@ Pro 결과 역시 Sol이 실제 파일과 테스트에 대조합니다.
 
 Web Sol XHIGH 또는 Web GPT-6 Pro에 프로젝트 실무를 맡길 때 연결 상태를 추측하지 않습니다.
 
+Web GPT-5.6 Sol XHIGH의 실제 Oracle/DevSpace 경로, 검증된 파일 작업 범위와 삭제·이동 금지선은 `workflow/WEB-SOL-DEVSPACE-OPERATING-CONTRACT.md`를 함께 따릅니다. **Oracle의 기본 예시가 Latest를 사용한다는 이유만으로 GPT-5.6 Sol을 지원하지 않는다고 판단하지 않습니다.** 현재 검증된 지정 경로는 `gpt-5.6-sol / extra-high / select`이며, 지원 불가 판정은 실제 실행 근거가 있을 때만 내립니다.
+
 1. 정확한 프로젝트 루트를 확인합니다.
 2. **DevSpace Tunnel의 `open_workspace`를 실제 호출합니다.**
 3. 성공한 workspace를 기준으로 Web GPT 작업을 진행합니다.
@@ -285,6 +287,9 @@ AI 응답 완료 ≠ 구현 완료 ≠ 정적 검증 완료 ≠ 실제 게임 �
 ## 15. 모델 또는 기능을 사용할 수 없을 때
 
 - 정해진 모델/추론 강도를 다른 모델로 조용히 대체하지 않습니다.
+- `Latest`가 기본 경로라는 문서만 보고 Web GPT-5.6 Sol XHIGH를 미지원으로 판정하지 않습니다. CLI 거부, 실제 웹 모델 선택 실패, UI 미지원 또는 실행 오류처럼 관측된 근거를 확인합니다.
+- 로그인·임시채팅 개인화 실패는 모델 미지원과 구분합니다.
+- 검증된 Web Sol XHIGH 경로가 막혀도 Codex Sol XHIGH나 다른 모델로 임의 대체하지 않습니다.
 - Web Sol XHIGH에 맡길 상당한 실무인데 자동 경로만 막힌 경우, 가능한 경우 **manual handoff를 먼저 준비**합니다.
 - 아주 작은 작업만 Sol이 직접 흡수합니다. 상당한 전문 실무를 연결 실패 하나만으로 자동으로 Sol에게 몰아주지 않습니다.
 - Astra나 Pro가 실제로 제공되지 않으면 실행했다고 가장하지 않습니다.
