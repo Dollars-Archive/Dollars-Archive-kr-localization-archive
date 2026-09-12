@@ -1,6 +1,6 @@
 @echo off
 setlocal
-powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File "%~dp0install-global.ps1"
+powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File "%~dp0install-global.ps1" %*
 set ERR=%ERRORLEVEL%
 if not "%ERR%"=="0" (
   echo.
