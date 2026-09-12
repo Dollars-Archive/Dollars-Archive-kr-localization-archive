@@ -18,6 +18,12 @@ const docs = [
     description: '게임별 프로젝트 구조, 검수 단계, 자료 관리와 에이전트 역할 분담.',
   },
   {
+    group: 'PROJECT / WORKLOG',
+    title: '공개 작업일지 운영 표준',
+    file: 'workflow/PUBLIC-WORKLOG-STANDARD.md',
+    description: '진행 중 프로젝트의 공개 제작일지와 노하우 비공개 경계를 관리하는 표준.',
+  },
+  {
     group: 'PAGES / DOCUMENTATION',
     title: 'GitHub Pages 설치 가이드 표준',
     file: 'workflow/GITHUB-PAGES-INSTALL-GUIDE-STANDARD.md',
