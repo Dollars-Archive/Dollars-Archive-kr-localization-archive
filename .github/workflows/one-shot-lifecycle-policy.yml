@@ -1,0 +1,60 @@
+name: Apply localization lifecycle policy
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - scripts/one-shot-lifecycle-policy.py
+      - .github/workflows/one-shot-lifecycle-policy.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch-policy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Patch lifecycle policy
+        run: python scripts/one-shot-lifecycle-policy.py
+
+      - name: Verify patch
+        shell: bash
+        run: |
+          git diff --check
+          python - <<'PY'
+          from pathlib import Path
+          paths = [
+              'CODEX-LOCALIZATION-BOOTSTRAP.md',
+              'workflow/PROJECT-OPERATING-MODEL.md',
+              'review/PRE-TRANSLATION-SETUP.md',
+              'templates/AGENTS.template.md',
+          ]
+          required = [
+              '01_프로젝트_문서', '02_한글화_작업', '03_검수_프로그램',
+              '04_최종_배포', '05_HD Pack', '버그 리포트',
+              'F:\\내 드라이브\\검수 프로그램',
+              '01_최신_용어집', '02_검수_필수파일', '03_검수_수정_CSV',
+              'row_key', 'category', 'subcategory', '최종대사_수정_누적.csv'
+          ]
+          for p in paths:
+              t = Path(p).read_text(encoding='utf-8')
+              missing = [x for x in required if x not in t]
+              if missing:
+                  raise SystemExit(f'{p}: missing {missing}')
+          print('POST_PATCH_VERIFY_OK')
+          PY
+
+      - name: Commit lifecycle update and remove one-shot helpers
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/one-shot-lifecycle-policy.yml scripts/one-shot-lifecycle-policy.py
+          git add CODEX-LOCALIZATION-BOOTSTRAP.md workflow/PROJECT-OPERATING-MODEL.md review/PRE-TRANSLATION-SETUP.md templates/AGENTS.template.md
+          git diff --cached --check
+          git commit -m "docs: align localization project lifecycle"
+          git push origin HEAD:main
