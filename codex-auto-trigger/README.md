@@ -16,12 +16,18 @@ codex-auto-trigger\install-global.cmd
 powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File .\codex-auto-trigger\install-global.ps1
 ```
 
+설치기는 `CODEX_HOME` 환경변수가 있으면 그 경로를 우선합니다. 별도 Codex 홈을 직접 지정해야 하는 환경에서는 다음처럼 한 번만 지정할 수 있습니다.
+
+```powershell
+.\codex-auto-trigger\install-global.cmd -CodexHome "<YOUR_CODEX_HOME>"
+```
+
 설치기는 다음을 수행합니다.
 
 - `~/.agents/skills/dollars-localization-bootstrap/`에 개인 Skill 설치
 - Skill의 implicit invocation 활성화
 - 설치 시점의 `CODEX-LOCALIZATION-BOOTSTRAP.md`를 fallback snapshot으로 보존
-- `~/.codex/AGENTS.md` 또는 기존 `AGENTS.override.md`에 관리 블록 1개 추가
+- 선택된 Codex 홈의 `AGENTS.md` 또는 기존 `AGENTS.override.md`에 관리 블록 1개 추가
 - 기존 파일이 있으면 수정 전 백업 생성
 - 설치 후 블록/Skill/snapshot을 다시 읽어 자체 검증
 
