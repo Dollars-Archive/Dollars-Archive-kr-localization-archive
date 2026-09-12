@@ -1,0 +1,33 @@
+name: Apply new project root bootstrap policy
+
+"on":
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/one-shot-new-project-root-policy.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch-policy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Patch and verify bootstrap
+        run: python scripts/one-shot-new-project-root-policy.py
+
+      - name: Commit bootstrap update and remove one-shot helpers
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/one-shot-new-project-root-policy.yml scripts/one-shot-new-project-root-policy.py
+          git add CODEX-LOCALIZATION-BOOTSTRAP.md
+          git diff --cached --check
+          git commit -m "docs: require game root before new localization work"
+          git push origin HEAD:main
