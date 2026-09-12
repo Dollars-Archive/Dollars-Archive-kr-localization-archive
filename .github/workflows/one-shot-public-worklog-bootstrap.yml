@@ -23,127 +23,19 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
       - name: Patch localization bootstrap
-        shell: bash
+        run: python .github/scripts/one_shot_public_worklog_patch.py bootstrap
+
+      - name: Commit localization bootstrap
         run: |
-          python - <<'PY'
-          from pathlib import Path
-
-          path = Path('CODEX-LOCALIZATION-BOOTSTRAP.md')
-          text = path.read_text(encoding='utf-8')
-
-          old = '''9. 플랫폼별 기술 노트는 실제 대상과 일치할 때만 선택해서 읽습니다.
-   - Nintendo Switch: `switch/SWITCH-KOREAN-LOCALIZATION-GUIDE.md`
-10. 이미 프로젝트에서 성공한 빌더, 샘플, 패치 방식, 승인된 번역 자산은 근거 없이 다시 설계하지 않습니다.
-11. 위험한 변경은 전체 적용 전에 조사 또는 단일 대표 샘플부터 수행합니다.
-12. 단일 샘플이 정적 검증뿐 아니라 실제 런타임에서 성공한 뒤에 전체로 확장합니다.
-13. 게임별 데이터, 관계도, 말투, 용어집, 오프셋, 패치 규칙은 다른 게임에서 자동으로 가져오지 않습니다.
-14. 산출물은 재현 가능한 도구, 테스트, manifest, 해시, 검증 기록을 남기는 방향으로 만듭니다.
-15. 실제 결과를 다시 읽거나 테스트하기 전에는 완료했다고 판단하지 않습니다.'''
-          new = '''9. 플랫폼별 기술 노트는 실제 대상과 일치할 때만 선택해서 읽습니다.
-   - Nintendo Switch: `switch/SWITCH-KOREAN-LOCALIZATION-GUIDE.md`
-10. 실제 공개 작업 시작을 선언하는 프로젝트라면 `workflow/PUBLIC-WORKLOG-STANDARD.md`를 읽고 루트 `WORKLOG.md`와 README의 `🚧 한국어화 작업 진행 중` 안내를 준비합니다. 후보 조사 단계에는 생성하지 않으며, 이미 최종 배포가 끝난 `Dollars-Archive/eve-rebirth-terror-kr-patch`와 `Dollars-Archive/eve-ghost-enemies-kr-patch`에는 소급 적용하지 않습니다.
-11. 이미 프로젝트에서 성공한 빌더, 샘플, 패치 방식, 승인된 번역 자산은 근거 없이 다시 설계하지 않습니다.
-12. 위험한 변경은 전체 적용 전에 조사 또는 단일 대표 샘플부터 수행합니다.
-13. 단일 샘플이 정적 검증뿐 아니라 실제 런타임에서 성공한 뒤에 전체로 확장합니다.
-14. 게임별 데이터, 관계도, 말투, 용어집, 오프셋, 패치 규칙은 다른 게임에서 자동으로 가져오지 않습니다.
-15. 산출물은 재현 가능한 도구, 테스트, manifest, 해시, 검증 기록을 남기는 방향으로 만듭니다.
-16. 실제 결과를 다시 읽거나 테스트하기 전에는 완료했다고 판단하지 않습니다.'''
-          if text.count(old) != 1:
-              raise SystemExit(f'bootstrap start-order anchor count={text.count(old)}')
-          text = text.replace(old, new, 1)
-
-          old2 = '''- 바이너리 포맷 가정과 오프셋
-- 승인된 번역과 UI 자산
-
----'''
-          new2 = '''- 바이너리 포맷 가정과 오프셋
-- 승인된 번역과 UI 자산
-- 공개 작업일지 (`WORKLOG.md`)
-
-공개 작업일지는 사용자에게 보여주는 진행 현황판이며, 게임별 내부 기술 기록이나 재현 가능한 제작 노하우 문서와 동일시하지 않습니다. 공개 범위는 `workflow/PUBLIC-WORKLOG-STANDARD.md`를 따릅니다.
-
----'''
-          if text.count(old2) != 1:
-              raise SystemExit(f'bootstrap project-list anchor count={text.count(old2)}')
-          text = text.replace(old2, new2, 1)
-
-          path.write_text(text, encoding='utf-8')
-          PY
           git add CODEX-LOCALIZATION-BOOTSTRAP.md
           git diff --cached --check
           git commit -m "docs: connect public worklog to localization bootstrap"
 
       - name: Patch AGENTS template
-        shell: bash
+        run: python .github/scripts/one_shot_public_worklog_patch.py agents
+
+      - name: Commit AGENTS template
         run: |
-          python - <<'PY'
-          from pathlib import Path
-
-          path = Path('templates/AGENTS.template.md')
-          text = path.read_text(encoding='utf-8')
-
-          old = '''<PROJECT_ROOT>/
-├─ .github/
-├─ docs/
-├─ source/
-├─ staging/
-├─ tests/
-├─ tools/
-├─ work/
-├─ .gitignore
-└─ AGENTS.md
-```
-
-PS3 및 그보다 이전 세대 작품은 다음 폴더를 추가로 준비합니다.'''
-          new = '''<PROJECT_ROOT>/
-├─ .github/
-├─ docs/
-├─ source/
-├─ staging/
-├─ tests/
-├─ tools/
-├─ work/
-├─ WORKLOG.md
-├─ .gitignore
-└─ AGENTS.md
-```
-
-`WORKLOG.md`는 실제 공개 한국어화 작업 시작을 선언한 프로젝트에서 사용합니다. 아직 후보 조사 단계라면 생성을 보류할 수 있습니다.
-
-PS3 및 그보다 이전 세대 작품은 다음 폴더를 추가로 준비합니다.'''
-          if text.count(old) != 1:
-              raise SystemExit(f'agents layout anchor count={text.count(old)}')
-          text = text.replace(old, new, 1)
-
-          anchor = '''각 차수는 서로 다른 행 구간이 아니라 전체 대사집을 다시 검수하는 별도 패스입니다.
-
-## Scope Boundary'''
-          insert = '''각 차수는 서로 다른 행 구간이 아니라 전체 대사집을 다시 검수하는 별도 패스입니다.
-
-## Public Worklog
-
-실제 공개 한국어화 작업 시작을 선언한 프로젝트에서는 아카이브의 `workflow/PUBLIC-WORKLOG-STANDARD.md`를 따릅니다.
-
-- 게임 저장소 루트의 `WORKLOG.md` 단일 파일을 사용합니다.
-- 새 날짜 기록은 항상 맨 위에 추가합니다.
-- 실제로 의미 있는 작업이 있었던 날만 기록합니다.
-- README 상단에는 `🚧 한국어화 작업 진행 중` 안내와 `WORKLOG.md` 링크를 둡니다.
-- 작업 내용은 일반 사용자가 이해할 수 있는 성과·진행 상황 중심으로 한 단계 추상화합니다.
-- 정확한 오프셋, 함수 주소, 바이너리 재현 정보, 내부 분석·자동화 스크립트, 검수 프로그램 핵심 구현, 우회·후킹·패치 포인트 등 내부 기술 레시피는 공개하지 않습니다.
-- 첫 배포 후에도 `WORKLOG.md`를 삭제하지 않고 프로젝트 제작 역사로 유지합니다.
-- 새 문서를 만들 때는 `templates/WORKLOG.template.md`를 기준으로 시작합니다.
-
-핵심 원칙은 **“성과는 공개하고, 레시피는 공개하지 않는다.”** 입니다.
-
-이미 최종 배포가 끝난 `Dollars-Archive/eve-rebirth-terror-kr-patch`와 `Dollars-Archive/eve-ghost-enemies-kr-patch`에는 이 규칙을 소급 적용하지 않습니다.
-
-## Scope Boundary'''
-          if text.count(anchor) != 1:
-              raise SystemExit(f'agents public-worklog anchor count={text.count(anchor)}')
-          text = text.replace(anchor, insert, 1)
-
-          path.write_text(text, encoding='utf-8')
-          PY
           git add templates/AGENTS.template.md
           git diff --cached --check
           git commit -m "docs: add public worklog rules to project template"
