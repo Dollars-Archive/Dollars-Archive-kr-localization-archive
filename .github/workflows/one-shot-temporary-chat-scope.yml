@@ -1,0 +1,33 @@
+name: Apply temporary-chat personalization scope clarification
+
+"on":
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/one-shot-temporary-chat-scope.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch-policy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Patch and verify policies
+        run: python scripts/one-shot-temporary-chat-scope.py
+
+      - name: Commit policy update and remove one-shot helpers
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/one-shot-temporary-chat-scope.yml scripts/one-shot-temporary-chat-scope.py
+          git add CODEX-LOCALIZATION-BOOTSTRAP.md workflow/SOL-LUNA-AGENT-POLICY.md templates/AGENTS.template.md workflow/WEB-SOL-DEVSPACE-OPERATING-CONTRACT.md codex-auto-trigger/SKILL.md
+          git diff --cached --check
+          git commit -m "docs: distinguish account and temporary-chat personalization"
+          git push origin HEAD:main
