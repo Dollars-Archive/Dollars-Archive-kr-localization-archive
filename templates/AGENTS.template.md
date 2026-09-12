@@ -55,6 +55,41 @@ PS2에서는 PCSX2 Texture Replacement를 대표 예로 사용하고, 다른 플
 
 HD Pack 분석 단계(Stage A)에서는 사용자의 별도 승인이 없는 한 대량 업스케일, 전체 팩 제작, FMV 재인코딩, 장시간 플레이/대량 dump 수집, 원본 ROM/ISO 수정 또는 실행 파일 패치를 하지 않습니다.
 
+## Font Selection
+
+새 한글 폰트를 선택하거나 기존 폰트를 교체해야 하면 아카이브의 `workflow/FONT-SELECTION-POLICY.md`를 읽습니다.
+
+기본 후보 검색처:
+
+```text
+https://font.emulog.app/#fonts
+```
+
+먼저 게임의 실제 폰트 규격을 확인합니다.
+
+- 셀/타일 폭과 높이
+- 실제 표시 픽셀 크기
+- BPP / 팔레트 / 알파
+- 고정폭/가변폭
+- 글리프 수와 인코딩
+- 아틀라스/텍스처 배치 방식
+- 줄 높이, 자간, 베이스라인
+- 용량/VRAM/바이너리 제약
+
+그 뒤 기술적으로 맞는 폰트 후보를 가능하면 약 3개 추립니다.
+
+각 후보는 같은 문구, 같은 픽셀 크기, 같은 화면 조건으로 소량 샘플을 만들어 사용자에게 비교 제시합니다.
+사용자가 직접 최종 폰트를 선택하기 전에는 전체 폰트 교체나 대량 반영을 하지 않습니다.
+
+- Font candidate A: `<FONT_A>`
+- Font candidate B: `<FONT_B>`
+- Font candidate C: `<FONT_C>`
+- User-approved font: `<APPROVED_FONT_OR_NONE>`
+- Approved font spec: `<CELL_SIZE_BPP_ENCODING_ETC>`
+
+기술적으로 유효한 후보가 3개 미만이면 억지로 수를 채우지 않습니다.
+사용자가 확정한 폰트는 이후 AI가 취향 판단만으로 임의 변경하지 않습니다.
+
 ## Scope Boundary
 
 수정 허용 범위:
@@ -67,6 +102,7 @@ HD Pack 분석 단계(Stage A)에서는 사용자의 별도 승인이 없는 한
 - `<FORBIDDEN_NEIGHBOR_PROJECTS>`
 - 원본 보존 영역
 - 사용자 승인 없이 변경하면 안 되는 기존 성공 산출물
+- 사용자가 승인하지 않은 최종 폰트 대량 적용
 - 사용자가 요청하지 않은 `05_HD Pack` 실제 제작 작업
 
 ## Agent Model Policy
@@ -123,6 +159,7 @@ Terra는 기본 워크플로에서 사용하지 않습니다.
 
 - `<APPROVED_ITEM_1>`
 - `<APPROVED_ITEM_2>`
+- `<APPROVED_FONT_IF_ANY>`
 
 ## Stage Workflow
 
@@ -140,6 +177,8 @@ Terra는 기본 워크플로에서 사용하지 않습니다.
 
 HD Pack이 사용자에게 별도로 승인된 경우에도 번역/패치 Stage와 구분해서 관리합니다.
 HD Pack 자체의 Stage와 증분 처리 규칙은 `workflow/HD-PACK-PIPELINE.md`를 따릅니다.
+
+폰트 작업은 `규격 조사 → 후보 약 3개 → 동일 조건 샘플 → 사용자 선택 → 전체 반영` 순서로 진행합니다.
 
 ## Required Tests
 
@@ -173,4 +212,4 @@ HD Pack 자체의 Stage와 증분 처리 규칙은 `workflow/HD-PACK-PIPELINE.md
 
 Codex는 최종 검수 CSV의 반입, 구조 검증, 빌드 및 실제 패치 적용을 담당합니다.
 
-HD Pack 제작은 번역 검수의 자동 후속 단계가 아닙니다. 사용자 요청이 있을 때만 별도 작업으로 시작합니다.
+폰트 최종 선택은 사용자가 승인하며, HD Pack 제작은 번역 검수의 자동 후속 단계가 아닙니다. 사용자 요청이 있을 때만 별도 작업으로 시작합니다.
