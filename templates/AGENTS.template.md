@@ -39,6 +39,22 @@ PS3 및 그보다 이전 세대 작품은 다음 폴더를 추가로 준비합�
 - HD Pack requested by user: `<YES_OR_NO>`
 - HD Pack status: `<NOT_STARTED_OR_STATUS>`
 
+사용자가 HD Pack 제작 또는 가능성 분석을 명시적으로 요청한 경우에는 작업 전에 아카이브의 `workflow/HD-PACK-PIPELINE.md`를 읽습니다.
+
+기본 전략:
+
+```text
+ROM/ISO 내부 자산 우선 추출
+→ 작은 샘플로 구조 검증
+→ 베이스 자산 HD화
+→ 에뮬레이터 texture dump/hash와 매칭
+→ 이후 실제 플레이에서는 신규 dump만 증분 처리
+```
+
+PS2에서는 PCSX2 Texture Replacement를 대표 예로 사용하고, 다른 플랫폼에서는 해당 에뮬레이터의 덤프/교체 규칙을 직접 확인합니다.
+
+HD Pack 분석 단계(Stage A)에서는 사용자의 별도 승인이 없는 한 대량 업스케일, 전체 팩 제작, FMV 재인코딩, 장시간 플레이/대량 dump 수집, 원본 ROM/ISO 수정 또는 실행 파일 패치를 하지 않습니다.
+
 ## Scope Boundary
 
 수정 허용 범위:
@@ -123,6 +139,7 @@ Terra는 기본 워크플로에서 사용하지 않습니다.
 3. `<STAGE_3>`
 
 HD Pack이 사용자에게 별도로 승인된 경우에도 번역/패치 Stage와 구분해서 관리합니다.
+HD Pack 자체의 Stage와 증분 처리 규칙은 `workflow/HD-PACK-PIPELINE.md`를 따릅니다.
 
 ## Required Tests
 
