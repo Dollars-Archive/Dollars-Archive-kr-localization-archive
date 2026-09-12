@@ -30,6 +30,13 @@
   - 용어집·캐릭터·관계도·말투 기준 자료 운영
   - 최종 CSV 반영과 실제 플레이 피드백 우선순위
 
+### 공개 작업일지
+
+- [공개 작업일지 운영 표준](https://dollars-archive.github.io/Dollars-Archive-kr-localization-archive/doc.html?file=workflow%2FPUBLIC-WORKLOG-STANDARD.md)
+  - 게임별 `WORKLOG.md` 단일 파일 운영
+  - README의 `🚧 한국어화 작업 진행 중` 선언과 작업일지 링크
+  - 사용자에게는 성과와 진행 상황을 공개하고 제작 노하우는 비공개로 유지
+
 ### 설치 가이드 / GitHub Pages
 
 - [GitHub Pages 설치 가이드 표준](https://dollars-archive.github.io/Dollars-Archive-kr-localization-archive/doc.html?file=workflow%2FGITHUB-PAGES-INSTALL-GUIDE-STANDARD.md)
