@@ -84,10 +84,10 @@ Release / 다운로드 ↗
 권장 상단 순서:
 
 ```text
-원문 보기 ↗ | Release / 다운로드 ↗ | GitHub ↗
+Release / 다운로드 ↗ | GitHub ↗
 ```
 
-모바일처럼 폭이 좁을 때 링크를 일부 숨겨야 한다면 **원문 보기 링크를 먼저 숨기고 Release / 다운로드 링크는 유지**합니다.
+`INSTALL.md` 원문으로 바로 가는 별도 버튼은 기본 UI에 두지 않습니다. 관리 원본은 저장소에 유지하되 사용자 동선은 **Pages → Release / 다운로드** 중심으로 단순화합니다.
 
 > [!NOTE]
 > 공개 Release가 없는 저장소에는 Release 링크를 억지로 표시하지 않습니다. 한 저장소에 여러 독립 프로젝트가 함께 있고 각 프로젝트가 서로 다른 Release를 사용한다면 `/releases/latest` 대신 해당 프로젝트의 대표 Release 주소를 명시적으로 연결합니다.
@@ -97,7 +97,7 @@ Release / 다운로드 ↗
 `INSTALL.md`는 삭제하지 않습니다.
 
 - Pages가 읽는 원본 데이터
-- GitHub에서 원문을 확인할 때 사용하는 문서
+- GitHub에서 직접 확인할 수 있는 관리용 문서
 - Pages가 일시적으로 동작하지 않을 때의 fallback
 
 으로 유지합니다.
@@ -143,7 +143,7 @@ Pages 빌드가 시작된 직후에는 잠시 404가 표시될 수 있으므로,
 - 이미지 반응형 표시
 - 모바일 레이아웃
 - 다크모드
-- 상단 `원문 보기`, `Release / 다운로드`, `GitHub` 링크
+- 상단 `Release / 다운로드`, `GitHub` 링크
 - Release가 존재할 경우 문서에서 뒤로 이동하지 않고 바로 배포 파일 화면으로 이동할 수 있는 동선
 
 ### 게임별 테마
@@ -202,11 +202,12 @@ INSTALL.md 수정
 4. 저장소 이름, 게임명, raw `INSTALL.md` URL을 변경
 5. 게임에 맞는 포인트 색을 선택
 6. 공개 Release가 있으면 Pages 상단에 `Release / 다운로드 ↗` 직행 링크 추가
-7. README의 설치 링크를 Pages로 변경
-8. 최신 공개 Release의 설치 가이드 링크를 Pages로 변경
-9. GitHub Pages를 `main /docs`로 활성화
-10. Pages build 성공 확인
-11. 실제 Pages 주소에서 PC와 모바일 표시 및 Release 직행 링크 확인
+7. 별도의 `원문 보기` 버튼은 만들지 않음
+8. README의 설치 링크를 Pages로 변경
+9. 최신 공개 Release의 설치 가이드 링크를 Pages로 변경
+10. GitHub Pages를 `main /docs`로 활성화
+11. Pages build 성공 확인
+12. 실제 Pages 주소에서 PC와 모바일 표시 및 Release 직행 링크 확인
 
 > [!WARNING]
 > Pages가 아직 활성화되지 않은 상태에서 README/Release 링크를 먼저 바꾸면 사용자가 일시적으로 404를 볼 수 있습니다. 가능하면 Pages 활성화와 배포 성공 확인 후 공개 링크를 전환합니다.
@@ -239,10 +240,11 @@ INSTALL.md = 관리용 단일 원본
 GitHub Pages = 사용자용 설치 설명서
 README / Release = Pages로 들어가는 입구
 Pages 상단 = Release / 다운로드로 바로 가는 출구
+원문 보기 버튼 = 기본적으로 표시하지 않음
 게임별 차이 = 포인트 색과 최소한의 테마 조정
 ```
 
-**공개 Release가 존재하는 설치 설명서라면 Release 직행 링크도 기본 구성으로 포함합니다.**
+**공개 Release가 존재하는 설치 설명서라면 Release 직행 링크도 기본 구성으로 포함하고, 원문 보기 버튼은 기본 구성에서 제외합니다.**
 
 사용자가 특별히 `INSTALL.md`만 원하거나 Pages를 원하지 않는다고 말한 경우에만 이 방식을 생략합니다.
 
