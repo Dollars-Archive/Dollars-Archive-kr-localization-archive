@@ -24,9 +24,12 @@
 ├─ tests/
 ├─ tools/
 ├─ work/
+├─ WORKLOG.md
 ├─ .gitignore
 └─ AGENTS.md
 ```
+
+`WORKLOG.md`는 실제 공개 한국어화 작업 시작을 선언한 프로젝트에서 사용합니다. 아직 후보 조사 단계라면 생성을 보류할 수 있습니다.
 
 PS3 및 그보다 이전 세대 작품은 다음 폴더를 추가로 준비합니다.
 
@@ -128,6 +131,23 @@ https://font.emulog.app/#fonts
 ```
 
 각 차수는 서로 다른 행 구간이 아니라 전체 대사집을 다시 검수하는 별도 패스입니다.
+
+## Public Worklog
+
+실제 공개 한국어화 작업 시작을 선언한 프로젝트에서는 아카이브의 `workflow/PUBLIC-WORKLOG-STANDARD.md`를 따릅니다.
+
+- 게임 저장소 루트의 `WORKLOG.md` 단일 파일을 사용합니다.
+- 새 날짜 기록은 항상 맨 위에 추가합니다.
+- 실제로 의미 있는 작업이 있었던 날만 기록합니다.
+- README 상단에는 `🚧 한국어화 작업 진행 중` 안내와 `WORKLOG.md` 링크를 둡니다.
+- 작업 내용은 일반 사용자가 이해할 수 있는 성과·진행 상황 중심으로 한 단계 추상화합니다.
+- 정확한 오프셋, 함수 주소, 바이너리 재현 정보, 내부 분석·자동화 스크립트, 검수 프로그램 핵심 구현, 우회·후킹·패치 포인트 등 내부 기술 레시피는 공개하지 않습니다.
+- 첫 배포 후에도 `WORKLOG.md`를 삭제하지 않고 프로젝트 제작 역사로 유지합니다.
+- 새 문서를 만들 때는 `templates/WORKLOG.template.md`를 기준으로 시작합니다.
+
+핵심 원칙은 **“성과는 공개하고, 레시피는 공개하지 않는다.”** 입니다.
+
+이미 최종 배포가 끝난 `Dollars-Archive/eve-rebirth-terror-kr-patch`와 `Dollars-Archive/eve-ghost-enemies-kr-patch`에는 이 규칙을 소급 적용하지 않습니다.
 
 ## Scope Boundary
 
