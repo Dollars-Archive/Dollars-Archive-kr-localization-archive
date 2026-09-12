@@ -1,4 +1,5 @@
 param(
+    [string]$CodexHome,
     [switch]$Force
 )
 
@@ -41,7 +42,10 @@ $SkillFile = Join-Path $SkillRoot 'SKILL.md'
 $SkillAgentYaml = Join-Path $SkillAgentsDir 'openai.yaml'
 $SnapshotFile = Join-Path $SkillRoot 'CODEX-LOCALIZATION-BOOTSTRAP.snapshot.md'
 
-$CodexHome = if ($env:CODEX_HOME) { $env:CODEX_HOME } else { Join-Path $HomeDir '.codex' }
+if ([string]::IsNullOrWhiteSpace($CodexHome)) {
+    $CodexHome = if ($env:CODEX_HOME) { $env:CODEX_HOME } else { Join-Path $HomeDir '.codex' }
+}
+$CodexHome = [System.IO.Path]::GetFullPath($CodexHome)
 $OverrideFile = Join-Path $CodexHome 'AGENTS.override.md'
 $AgentsFile = if (Test-Path $OverrideFile) { $OverrideFile } else { Join-Path $CodexHome 'AGENTS.md' }
 
