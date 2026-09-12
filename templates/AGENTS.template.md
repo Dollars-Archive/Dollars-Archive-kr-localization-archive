@@ -13,50 +13,31 @@
 
 ## Standard Project Layout
 
-기본 구조는 `이상한 환상향 로터스 Lotus Labyrinth` 프로젝트를 기준으로 합니다.
+신규 게임은 다른 실작업보다 먼저 다음 6개 폴더를 생성합니다.
 
 ```text
 <PROJECT_ROOT>/
-├─ .github/
-├─ docs/
-├─ source/
-├─ staging/
-├─ tests/
-├─ tools/
-├─ work/
-├─ WORKLOG.md
-├─ .gitignore
-└─ AGENTS.md
+├─ 01_프로젝트_문서/
+├─ 02_한글화_작업/
+├─ 03_검수_프로그램/
+├─ 04_최종_배포/
+├─ 05_HD Pack/
+└─ 버그 리포트/
 ```
 
-`WORKLOG.md`는 실제 공개 한국어화 작업 시작을 선언한 프로젝트에서 사용합니다. 아직 후보 조사 단계라면 생성을 보류할 수 있습니다.
+- `01_프로젝트_문서`: 분석·설계·결정·인수인계 문서
+- `02_한글화_작업`: 파일 분석, 추출·재삽입, 폰트/UI/대사, 빌더, staging
+- `03_검수_프로그램`: 안정 원장, row_key, category/subcategory, 게임 전용 검수 프로그램, 최종 CSV 반입
+- `04_최종_배포`: 최종 모드·패치·패처·배포 준비
+- `05_HD Pack`: 폴더만 기본 생성. 사용자 명시 요청 전 실제 HD Pack 작업 금지
+- `버그 리포트`: 재현 오류·실플레이 문제·증거
 
-PS3 및 그보다 이전 세대 작품은 다음 폴더를 추가로 준비합니다.
-
-```text
-05_HD Pack/
-```
-
-**HD Pack은 폴더만 준비합니다. 사용자가 명시적으로 HD Pack 제작을 요청하기 전에는 텍스처 덤프, 업스케일, 이미지 재가공 또는 교체 작업을 시작하지 않습니다.**
+`.github`, `docs`, `source`, `staging`, `tests`, `tools`, `work`, `WORKLOG.md` 등은 프로젝트에 필요하면 추가하지만 공통 필수 6폴더로 취급하지 않습니다. 기존 프로젝트는 이 템플릿 때문에 강제 재배치하지 않습니다.
 
 - HD Pack requested by user: `<YES_OR_NO>`
 - HD Pack status: `<NOT_STARTED_OR_STATUS>`
 
-사용자가 HD Pack 제작 또는 가능성 분석을 명시적으로 요청한 경우에는 작업 전에 아카이브의 `workflow/HD-PACK-PIPELINE.md`를 읽습니다.
-
-기본 전략:
-
-```text
-ROM/ISO 내부 자산 우선 추출
-→ 작은 샘플로 구조 검증
-→ 베이스 자산 HD화
-→ 에뮬레이터 texture dump/hash와 매칭
-→ 이후 실제 플레이에서는 신규 dump만 증분 처리
-```
-
-PS2에서는 PCSX2 Texture Replacement를 대표 예로 사용하고, 다른 플랫폼에서는 해당 에뮬레이터의 덤프/교체 규칙을 직접 확인합니다.
-
-HD Pack 분석 단계(Stage A)에서는 사용자의 별도 승인이 없는 한 대량 업스케일, 전체 팩 제작, FMV 재인코딩, 장시간 플레이/대량 dump 수집, 원본 ROM/ISO 수정 또는 실행 파일 패치를 하지 않습니다.
+HD Pack이 명시적으로 요청된 경우에만 `workflow/HD-PACK-PIPELINE.md`를 읽고 실제 작업을 시작합니다.
 
 ## Font Selection
 
@@ -93,44 +74,52 @@ https://font.emulog.app/#fonts
 기술적으로 유효한 후보가 3개 미만이면 억지로 수를 채우지 않습니다.
 사용자가 확정한 폰트는 이후 AI가 취향 판단만으로 임의 변경하지 않습니다.
 
-## Pre-Translation Baseline Gate
+## Localization Lifecycle / Pre-Translation Gates
 
-대량 대사 번역 또는 검수 프로그램의 본 번역 기준자료 등록 전에 `review/PRE-TRANSLATION-SETUP.md`를 읽습니다.
+대량 번역 전에 아래 상태를 프로젝트별로 기록합니다.
 
-**용어집·캐릭터·관계·말투를 먼저 세팅하고 번역을 시작합니다.**
+- Minimal Korean output: `<NOT_STARTED / PASS / FAIL>`
+- Runtime/layout gate: `<NOT_STARTED / PASS / CONDITIONAL / NEEDS_TECH_WORK>`
+- Full Japanese corpus extraction: `<NOT_STARTED / IN_PROGRESS / READY>`
+- Stable row_key ledger: `<NOT_STARTED / IN_PROGRESS / READY>`
+- Category/subcategory classification: `<NOT_STARTED / IN_PROGRESS / READY>`
+- Game-specific review program: `<NOT_STARTED / IN_PROGRESS / READY>`
+- Pre-translation language baseline: `<NOT_STARTED / LOCAL_DRAFT_ONLY / DRIVE_REGISTRATION_PENDING / READY>`
+- Google Drive workspace: `F:\내 드라이브\검수 프로그램\<GAME_FOLDER>`
+- Drive sync/readback: `<NOT_STARTED / PENDING / VERIFIED>`
 
-- Pre-translation baseline status: `<NOT_STARTED / IN_PROGRESS / READY>`
-- Glossary readiness: `<STATUS>`
-- Character names/personality readiness: `<STATUS>`
-- Speech-style readiness: `<STATUS>`
-- Relationship/honorific readiness: `<STATUS>`
-- Unresolved/HOLD count or reference: `<VALUE_OR_PATH>`
-
-최소 준비 항목:
-
-- 주요 캐릭터 이름·별칭·칭호
-- 주요 반복 용어
-- 캐릭터 성격과 기본 말투
-- 화자 → 청자 방향 관계
-- 반말/존댓말
-- 호칭
-- 근거 출처와 확정 상태
-
-캐릭터 이름은 사용자 확정값과 공식 자료를 우선합니다. 공식 자료가 일본어뿐이고 한국어 표기가 애매하면 나무위키를 참고하고, 부족하면 일본 위키·팬 위키·사전·작품 자료를 교차 확인합니다. 그래도 불명확하면 HOLD합니다.
-
-캐릭터 성격·말투는 실제 일본어 대사와 공식 소개, 매뉴얼·설정집·당시 연재 기사·인터뷰·특집 자료를 우선하고 나무위키와 일본 위키를 보조 자료로 사용합니다.
-
-일본어판과 영어판이 함께 있으면 일본어 원문을 대사·용어·말투·존대·호칭의 기준으로 사용합니다. 영어판은 보조자료입니다.
-
-검수 패스의 기본 작업 단위는 고정합니다.
+고정 순서:
 
 ```text
-1차: 전체 대사집을 1,000행 단위로 기초 검수
-2차: 1차 결과 전체를 다시 1,000행 단위로 자연화·말투 검수
-3차: 2차 결과 전체를 다시 500행 단위로 최종 정밀검수
+최소 한글 출력
+→ [n]·반각/전각·가로폭·줄 수·RSC/인코딩·다음 장면 진행 검증
+→ 전체 일본어 원문 추출
+→ 안정 row_key
+→ category/subcategory
+→ 게임 전용 검수 프로그램
+→ 용어·캐릭터·말투·화자→청자 방향별 관계 0단계
+→ Google Drive 검수 작업장
+→ 1차 1000 → 2차 1000 → 3차 500
+→ 최종 누적 CSV 최신 원장 반입
+→ 모드/패치 + 실기 검증
 ```
 
-각 차수는 서로 다른 행 구간이 아니라 전체 대사집을 다시 검수하는 별도 패스입니다.
+게임 전용 검수 프로그램은 용어집 최종화 전에 준비합니다. 구조는 `D:\Codex\# 검수 프로그램\EVE 고스트 에너미즈`, 카테고리화는 `D:\Codex\# 검수 프로그램\이상한 환상향 로터스 라비린스`를 참고할 수 있으나 다른 게임의 데이터·용어·관계·오프셋은 복사하지 않습니다.
+
+0단계 기준자료에는 캐릭터 이름·세계관/아이템/스킬/시스템 용어, 성격·말투, 화자 → 청자 방향별 관계, 방향별 반말/존댓말·호칭·예외와 출처/HOLD 상태를 포함합니다. A → B와 B → A를 별도로 관리합니다.
+
+Google Drive 실제 검수 작업공간:
+
+```text
+F:\내 드라이브\검수 프로그램\<게임명>\
+├─ 01_최신_용어집
+├─ 02_검수_필수파일
+└─ 03_검수_수정_CSV
+```
+
+`03_검수_수정_CSV`의 대사집은 단순 문장 덤프가 아니라 최신 원장에서 내보낸 `row_key`, 일본어 원문, `category`, `subcategory`를 유지해야 합니다. `02_검수_필수파일`의 1차·2차·3차 지시문은 서로 섞지 않습니다.
+
+Drive 동기화와 등록 파일 재조회가 끝나기 전에는 0단계 완료 또는 1차 시작 가능이라고 표시하지 않습니다. 3차 완료 후 `<게임약칭>_최종대사_수정_누적.csv`를 최신 원장에 반입합니다.
 
 ## Public Worklog
 
@@ -251,31 +240,32 @@ DevSpace `502` / `network_error`는 별도 연결 장애 규칙에 따라 최소
 
 ## Stage Workflow
 
-기본 흐름:
+프로젝트의 기본 라이프사이클은 다음과 같습니다.
 
 ```text
-조사 → 단일 샘플 → 런타임 검증 → 전체 적용 → 자동 검증 → 변경분만 배포
+프로젝트 6폴더 생성
+→ 롬/게임 구조 분석
+→ 최소 한글 출력
+→ 출력·진행 안전성 게이트
+→ 전체 일본어 원문 추출
+→ 안정 row_key + category/subcategory
+→ 게임 전용 검수 프로그램
+→ 번역 전 0단계 기준자료
+→ Google Drive 세팅/동기화/재조회
+→ 1차 1,000행 전체 검수
+→ 2차 1,000행 전체 재검수
+→ 3차 500행 전체 정밀검수
+→ 최종 누적 CSV 최신 원장 반입
+→ 정적 검증
+→ 모드/패치 생성
+→ 실제 플레이 검증
 ```
 
-번역·검수 파이프라인은 별도로 다음 고정 단위를 사용합니다.
+현재 프로젝트의 단계: `<CURRENT_LIFECYCLE_STAGE>`
 
-```text
-0단계 기준자료 구축
-→ 1차 1,000행 단위
-→ 2차 1,000행 단위
-→ 3차 500행 정밀검수
-```
+HD Pack은 위 라이프사이클의 자동 후속 단계가 아닙니다. `05_HD Pack` 폴더는 준비하되 사용자 명시 요청 전 실제 제작을 시작하지 않습니다.
 
-현재 프로젝트에 필요한 엔지니어링 Stage를 아래에 정의합니다.
-
-1. `<STAGE_1>`
-2. `<STAGE_2>`
-3. `<STAGE_3>`
-
-HD Pack이 사용자에게 별도로 승인된 경우에도 번역/패치 Stage와 구분해서 관리합니다.
-HD Pack 자체의 Stage와 증분 처리 규칙은 `workflow/HD-PACK-PIPELINE.md`를 따릅니다.
-
-폰트 작업은 `규격 조사 → 후보 약 3개 → 동일 조건 샘플 → 사용자 선택 → 전체 반영` 순서로 진행합니다.
+폰트 작업이 필요한 경우 `workflow/FONT-SELECTION-POLICY.md`의 `규격 조사 → 후보 약 3개 → 동일 조건 샘플 → 사용자 선택 → 전체 반영` 순서를 별도로 적용합니다.
 
 ## Required Tests
 
