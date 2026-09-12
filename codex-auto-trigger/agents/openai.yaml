@@ -1,0 +1,8 @@
+interface:
+  display_name: "Dollars Localization Bootstrap"
+  short_description: "Auto-loads the localization bootstrap for game Korean localization work"
+  default_prompt: "Use $dollars-localization-bootstrap for this game localization task. Read the latest canonical bootstrap first, then continue within the project rules."
+policy:
+  products:
+    - "codex"
+  allow_implicit_invocation: true
