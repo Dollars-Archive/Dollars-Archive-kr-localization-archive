@@ -22,13 +22,15 @@ jobs:
           python - <<'PY'
           from pathlib import Path
           import re
-          import textwrap
 
           src = Path('.github/workflows/one-shot-field-hierarchy-routing.yml').read_text(encoding='utf-8')
           m = re.search(r"python - <<'PY'\n(?P<body>.*?)\n          PY", src, flags=re.S)
           if not m:
               raise SystemExit('Could not extract patch script from one-shot workflow')
-          body = textwrap.dedent(m.group('body'))
+          lines = []
+          for line in m.group('body').splitlines():
+              lines.append(line[10:] if line.startswith('          ') else line)
+          body = '\n'.join(lines) + '\n'
           compile(body, '<field-hierarchy-patch>', 'exec')
           exec(body, {'__name__': '__main__'})
           PY
