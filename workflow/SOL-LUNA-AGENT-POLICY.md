@@ -167,6 +167,8 @@ Web Sol XHIGH 또는 Web GPT-6 Pro에 프로젝트 실무를 맡길 때 연결 �
 
 Web GPT-5.6 Sol XHIGH의 실제 Oracle/DevSpace 경로, 검증된 파일 작업 범위와 삭제·이동 금지선은 `workflow/WEB-SOL-DEVSPACE-OPERATING-CONTRACT.md`를 함께 따릅니다. **Oracle의 기본 예시가 Latest를 사용한다는 이유만으로 GPT-5.6 Sol을 지원하지 않는다고 판단하지 않습니다.** 현재 검증된 지정 경로는 `gpt-5.6-sol / extra-high / select`이며, 지원 불가 판정은 실제 실행 근거가 있을 때만 내립니다.
 
+계정 로그인·MFA·계정 전환·계정 전역 메모리/개인화·앱/권한/OAuth 설정은 사용자만 처리합니다. 반면 Oracle이 소유한 **현재 임시채팅 탭의 맞춤화/개인화 상태 확인과, 정확한 비활성 제어 1개를 식별했을 때 그 임시채팅 안에서만 활성화하는 동작**은 계정 전역 설정 변경이 아니며 검증된 `ensureTemporaryChatPersonalization` 계열 helper가 자동 처리할 수 있습니다. `chatgpt-workspace-setup` 또는 다른 스킬의 `user handles account personalization` 문구를 이 임시채팅 토글까지 확대해석하여 사용자에게 매 run 수동 조작을 요구하지 않습니다. 정확한 제어가 없거나 모호하거나 로그인/MFA/계정 수준 변경이 필요할 때만 자동 조작을 중단하고 사용자에게 실제 막힌 지점을 요청합니다.
+
 1. 정확한 프로젝트 루트를 확인합니다.
 2. **DevSpace Tunnel의 `open_workspace`를 실제 호출합니다.**
 3. 성공한 workspace를 기준으로 Web GPT 작업을 진행합니다.

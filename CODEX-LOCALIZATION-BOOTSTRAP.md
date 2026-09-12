@@ -357,6 +357,8 @@ DevSpace는 최고난도 문제에서만 쓰는 비상 경로가 아니라, **We
 
 Web Sol XHIGH를 실제 파일 작업에 사용할 때는 `workflow/WEB-SOL-DEVSPACE-OPERATING-CONTRACT.md`도 읽습니다. 현재 사용자 환경에서는 Oracle 0.20.0의 `gpt-5.6-sol / extra-high / select` 경로가 실제 웹 UI 선택, DevSpace 파일 읽기·생성·기존 파일 정밀 수정·재읽기·결과 회수까지 검증됐습니다. **Latest 기본 설명만으로 미지원이라 추정하지 않으며, 삭제·이동·이름 변경은 검증된 쓰기 범위에 포함하지 않습니다.**
 
+계정 로그인·MFA·계정 전환·계정 전역 메모리/개인화·앱/권한/OAuth 설정은 사용자만 처리합니다. 반면 Oracle이 소유한 **현재 임시채팅 탭의 맞춤화/개인화 상태 확인과, 정확한 비활성 제어 1개를 식별했을 때 그 임시채팅 안에서만 활성화하는 동작**은 계정 전역 설정 변경이 아니며 검증된 `ensureTemporaryChatPersonalization` 계열 helper가 자동 처리할 수 있습니다. `chatgpt-workspace-setup` 또는 다른 스킬의 `user handles account personalization` 문구를 이 임시채팅 토글까지 확대해석하여 사용자에게 매 run 수동 조작을 요구하지 않습니다. 정확한 제어가 없거나 모호하거나 로그인/MFA/계정 수준 변경이 필요할 때만 자동 조작을 중단하고 사용자에게 실제 막힌 지점을 요청합니다.
+
 Web Sol XHIGH 또는 Web GPT-6 Pro에 프로젝트 작업을 맡길 때 연결 상태를 추측하지 않습니다.
 
 ## 기본 순서
