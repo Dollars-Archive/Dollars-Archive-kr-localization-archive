@@ -147,51 +147,75 @@ https://font.emulog.app/#fonts
 
 ## Agent Model Policy
 
-### Main Agent
+### 현장 조직도
 
 ```text
 GPT-5.6 Sol / High
-```
+  → 소장 / 감독관: 작업 분해, 배차, 위험 판단, 결과 검증, 최종 통합
 
-담당:
-
-- 요구사항 해석
-- 계획과 작업 분해
-- 아키텍처/위험 판단
-- 난이도 판정과 모델 배차
-- 결과 통합
-- 최종 검증
-
-### Routed Workers
-
-```text
-GPT-6 Astra / Medium
-  → 고난도 구현·디버깅
+DevSpace Tunnel + Web GPT-5.6 Sol / XHIGH
+  → 분야별 과장 / 기본 전문 실무 책임자: 일반~상당 난도의 분석·구현·설계·조사·검토
 
 GPT-5.6 Luna / XHIGH
-  → 단순·반복·범위가 확정된 구현/조사/테스트
+  → 기사 / 단순 작업자: 방법이 확정된 저위험 반복·검색·정리·테스트
 
-Web GPT XHIGH
-  → Luna에는 어렵고 Sol High에는 과한 독립 작업
+GPT-6 Astra / Medium
+  → 외주 전문업체: 고난도 구현·디버깅
 
-DevSpace Tunnel + Web GPT 6 Pro
-  → 매우 깊은 추론이 필요한 난제
+DevSpace Tunnel + Web GPT-6 Pro
+  → 최고급 외부 전문가: Astra급 접근으로도 풀기 어려운 최고난도 추론
 ```
 
 Terra는 기본 워크플로에서 사용하지 않습니다.
 
-## Delegation Rules
+### Sol High 운영 원칙
 
-- 모델을 많이 쓰는 것 자체를 목표로 하지 않음
-- Sol High가 바로 처리하는 편이 낫다면 위임하지 않음
-- 처음부터 고난도이면 Luna를 억지로 먼저 실패시키지 않고 Astra를 고려
-- 독립 작업만 병렬 위임
-- 같은 파일/같은 staging에 동시 쓰기 금지
-- 새로운 아키텍처 판단이 필요하면 Luna가 Sol에게 반환
-- 지정하지 않은 다른 프로젝트 탐색/수정 금지
+Sol은 기본 실무자가 아니라 감독관입니다.
+
+- 요구사항 해석
+- 프로젝트 문맥 유지
+- 작업 분해
+- 위험도·난이도 판정
+- 작업자 배차
+- 결과 취합과 충돌 해결
+- 실제 diff·테스트·런타임 근거 검증
+- 최종 통합
+
+`Sol이 할 수 있다`, `이미 문맥을 안다`, `금방 끝낼 수 있다`만으로 전문 실무 위임을 생략하지 않습니다. **Sol 사용량 절감은 정당한 위임 이득입니다.**
+
+상당한 프로젝트 실무를 Sol이 직접 수행할 때는 구체적인 예외 이유가 있어야 합니다.
+
+### 기본 실무 배차
+
+- 일반~상당 난도의 프로젝트 실무 → **DevSpace + Web GPT-5.6 Sol XHIGH 우선**
+- 단순·반복·기계·저위험 작업 → **Luna XHIGH**
+- 고난도 구현·디버깅 → **Astra Medium**
+- 최고난도 난제 → **DevSpace + Web GPT-6 Pro**
+
+Luna에는 새로운 아키텍처, 애매한 바이너리 추론, 불명확한 원인 분석, 캐릭터 관계·존대·말투의 애매한 최종 판정을 맡기지 않습니다.
+
+처음부터 Astra급 또는 Pro급 문제임이 명백하면 하위 작업자를 일부러 실패시키지 않습니다.
+
+### Delegation Rules
+
+- 비자명한 작업은 Sol이 직접 실행하기 전에 먼저 하위 작업으로 분해
+- Web Sol XHIGH에 맡길 전문 실무가 있는지 우선 확인
+- Luna로 떼어낼 안전한 기계 작업이 있는지 확인
+- 독립 작업이 2개 이상이면 병렬 배차 적극 검토
+- 같은 파일/같은 staging의 동시 쓰기 금지, 필요하면 순차 위임
+- 같은 파일을 다룬다는 이유만으로 전체 실무를 Sol이 독점하지 않음
 - 다른 모델의 결과는 Sol이 실제 diff와 테스트를 검토한 뒤 통합
-- Web GPT가 필요하면 DevSpace 연결 상태를 추측하지 말고 `open_workspace` 실제 호출 후 판정
-- Web GPT 자동 전달이 불가능하면 사용자가 그대로 보낼 수 있는 완성 의뢰문을 준비
+- Web GPT 실무를 맡길 때 DevSpace 연결 상태를 추측하지 말고 `open_workspace` 실제 호출 후 판정
+- Web GPT 자동 전달이 불가능하면 완성된 manual handoff 프롬프트를 준비
+- 상당한 작업을 Sol 혼자 수행했다면 결과 보고에 위임하지 않은 구체적 이유 기록
+
+### Web GPT Worker Safety
+
+Web GPT는 최종 작업 수행자로 호출합니다. 별도 지시 없이 Oracle/다른 GPT를 재호출하거나 호스트 완료를 기다리지 않습니다.
+
+역할 혼동·자기 재호출·호스트 대기·중첩 락·무의미한 반환은 동일 미션 자동 위임을 1회에서 종료하고 manual handoff로 전환합니다.
+
+DevSpace `502` / `network_error`는 별도 연결 장애 규칙에 따라 최소 1분 간격 최대 5회 재시도합니다.
 
 ## Existing Approved Assets / Decisions
 
