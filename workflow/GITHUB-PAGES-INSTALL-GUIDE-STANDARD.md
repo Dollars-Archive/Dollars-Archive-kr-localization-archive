@@ -65,6 +65,33 @@ README 상단과 다운로드/설치 안내에서 다음 형태로 연결합니�
 https://dollars-archive.github.io/<repo>/
 ```
 
+### Pages 상단의 Release / 다운로드 링크
+
+공개 Release가 존재하는 저장소의 웹 설치 가이드에는 **상단에서 Release 또는 다운로드 화면으로 바로 이동할 수 있는 링크를 기본으로 제공합니다.**
+
+일반적인 게임별 단일 저장소에서는 최신 공개 Release로 자동 이동하도록 다음 주소를 권장합니다.
+
+```text
+https://github.com/Dollars-Archive/<repo>/releases/latest
+```
+
+표시 문구 기본값:
+
+```text
+Release / 다운로드 ↗
+```
+
+권장 상단 순서:
+
+```text
+원문 보기 ↗ | Release / 다운로드 ↗ | GitHub ↗
+```
+
+모바일처럼 폭이 좁을 때 링크를 일부 숨겨야 한다면 **원문 보기 링크를 먼저 숨기고 Release / 다운로드 링크는 유지**합니다.
+
+> [!NOTE]
+> 공개 Release가 없는 저장소에는 Release 링크를 억지로 표시하지 않습니다. 한 저장소에 여러 독립 프로젝트가 함께 있고 각 프로젝트가 서로 다른 Release를 사용한다면 `/releases/latest` 대신 해당 프로젝트의 대표 Release 주소를 명시적으로 연결합니다.
+
 ### INSTALL.md
 
 `INSTALL.md`는 삭제하지 않습니다.
@@ -116,7 +143,8 @@ Pages 빌드가 시작된 직후에는 잠시 404가 표시될 수 있으므로,
 - 이미지 반응형 표시
 - 모바일 레이아웃
 - 다크모드
-- 상단 `원문 보기` 및 `GitHub` 링크
+- 상단 `원문 보기`, `Release / 다운로드`, `GitHub` 링크
+- Release가 존재할 경우 문서에서 뒤로 이동하지 않고 바로 배포 파일 화면으로 이동할 수 있는 동선
 
 ### 게임별 테마
 
@@ -162,6 +190,7 @@ INSTALL.md 수정
 - 외부 링크는 새 탭으로 열기
 - 코드 블록에 복사 버튼 추가
 - GitHub callout 문법을 카드형 박스로 변환
+- Release가 존재하면 상단에 최신 또는 대표 Release 직행 링크 제공
 
 ---
 
@@ -172,11 +201,12 @@ INSTALL.md 수정
 3. 공용 Pages 템플릿의 `docs/` 세트를 복제
 4. 저장소 이름, 게임명, raw `INSTALL.md` URL을 변경
 5. 게임에 맞는 포인트 색을 선택
-6. README의 설치 링크를 Pages로 변경
-7. 최신 공개 Release의 설치 가이드 링크를 Pages로 변경
-8. GitHub Pages를 `main /docs`로 활성화
-9. Pages build 성공 확인
-10. 실제 Pages 주소에서 PC와 모바일 표시 확인
+6. 공개 Release가 있으면 Pages 상단에 `Release / 다운로드 ↗` 직행 링크 추가
+7. README의 설치 링크를 Pages로 변경
+8. 최신 공개 Release의 설치 가이드 링크를 Pages로 변경
+9. GitHub Pages를 `main /docs`로 활성화
+10. Pages build 성공 확인
+11. 실제 Pages 주소에서 PC와 모바일 표시 및 Release 직행 링크 확인
 
 > [!WARNING]
 > Pages가 아직 활성화되지 않은 상태에서 README/Release 링크를 먼저 바꾸면 사용자가 일시적으로 404를 볼 수 있습니다. 가능하면 Pages 활성화와 배포 성공 확인 후 공개 링크를 전환합니다.
@@ -208,8 +238,11 @@ Release 전체 본문을 새 내용으로 덮어쓰기보다, 최신 Release를 
 INSTALL.md = 관리용 단일 원본
 GitHub Pages = 사용자용 설치 설명서
 README / Release = Pages로 들어가는 입구
+Pages 상단 = Release / 다운로드로 바로 가는 출구
 게임별 차이 = 포인트 색과 최소한의 테마 조정
 ```
+
+**공개 Release가 존재하는 설치 설명서라면 Release 직행 링크도 기본 구성으로 포함합니다.**
 
 사용자가 특별히 `INSTALL.md`만 원하거나 Pages를 원하지 않는다고 말한 경우에만 이 방식을 생략합니다.
 
@@ -226,6 +259,7 @@ https://dollars-archive.github.io/eve-rebirth-terror-kr-patch/
 - 와인/적갈색 계열 테마
 - README 및 최신 Release에서 Pages로 연결
 - `INSTALL.md` 자동 렌더링
+- Pages 상단에서 최신 Release / 다운로드로 바로 이동
 
 ### EVE ghost enemies
 
@@ -236,5 +270,6 @@ https://dollars-archive.github.io/eve-ghost-enemies-kr-patch/
 - 청보라 + 청록 계열 테마
 - README 및 최신 Release에서 Pages로 연결
 - `INSTALL.md` 자동 렌더링
+- Pages 상단에서 최신 Release / 다운로드로 바로 이동
 
 두 게임의 구현을 기본 참고 사례로 사용하되, 이후 게임에서는 저장소 구조와 실제 설치 방법을 먼저 확인한 뒤 적용합니다.
