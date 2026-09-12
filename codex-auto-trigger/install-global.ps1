@@ -51,7 +51,7 @@ $Block = @"
 $Start
 ## Game localization auto-bootstrap
 When the user starts, continues, reviews, debugs, or plans a game Korean-localization / 한글화 / 한글패치 task, load and follow the personal skill at:
-`$SkillFile`
+$SkillFile
 Do this before planning or modifying the localization project. Do not ask the user to provide the bootstrap GitHub link again. The skill must read the latest canonical GitHub bootstrap when available and use its local snapshot only as fallback.
 This managed block applies only to game localization work and does not change unrelated Codex tasks.
 $End
@@ -96,6 +96,7 @@ $VerifySkill = [System.IO.File]::ReadAllText($SkillFile)
 $VerifySnapshot = [System.IO.File]::ReadAllText($SnapshotFile)
 
 if ([regex]::Matches($VerifyAgents, $EscStart).Count -ne 1) { throw 'Global AGENTS managed block verification failed.' }
+if ($VerifyAgents -notmatch [regex]::Escape($SkillFile)) { throw 'Installed skill path is missing from global AGENTS.' }
 if ($VerifySkill -notmatch 'dollars-localization-bootstrap') { throw 'Installed skill verification failed.' }
 if ($VerifySnapshot -notmatch 'Codex 한글화 프로젝트 부트스트랩') { throw 'Bootstrap snapshot verification failed.' }
 
