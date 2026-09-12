@@ -25,6 +25,16 @@
   - 용어집·캐릭터·관계도·말투 기준 자료 운영
   - 최종 CSV 반영과 실제 플레이 피드백 우선순위
 
+### 설치 가이드 / GitHub Pages
+
+- [GitHub Pages 설치 가이드 표준](workflow/GITHUB-PAGES-INSTALL-GUIDE-STANDARD.md)
+  - `INSTALL.md`를 단일 원본으로 유지하고 GitHub Pages에서 자동 렌더링
+  - README와 최신 Release의 설치 링크를 Pages로 연결
+  - 공통 레이아웃 + 게임별 포인트 컬러 테마
+  - 목차·경고 박스·코드 복사·모바일·다크모드 공통 기능
+  - `main /docs` 배포와 Pages build 검증
+  - 새 게임 저장소에 재사용하는 기본 체크리스트
+
 ### Nintendo Switch 한국어 패치
 
 - [Nintendo Switch 게임 한국어 패치 제작 워크플로](switch/SWITCH-KOREAN-LOCALIZATION-GUIDE.md)
