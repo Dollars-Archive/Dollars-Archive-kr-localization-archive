@@ -3,13 +3,14 @@ name: One-shot public worklog bootstrap patch
 on:
   push:
     branches: [main]
+    paths:
+      - '.github/workflows/one-shot-public-worklog-bootstrap.yml'
 
 permissions:
   contents: write
 
 jobs:
   patch:
-    if: github.event.head_commit.message == 'chore: run public worklog bootstrap patch'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
