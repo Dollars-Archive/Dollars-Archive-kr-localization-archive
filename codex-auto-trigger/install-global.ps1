@@ -5,15 +5,28 @@ param(
 
 $ErrorActionPreference = 'Stop'
 
+# Keep this installer source ASCII-only for Windows PowerShell 5.1 compatibility.
 $RawBase = 'https://raw.githubusercontent.com/Dollars-Archive/Dollars-Archive-kr-localization-archive/main'
 $SkillUrl = "$RawBase/codex-auto-trigger/SKILL.md"
 $AgentYamlUrl = "$RawBase/codex-auto-trigger/agents/openai.yaml"
 $BootstrapUrl = "$RawBase/CODEX-LOCALIZATION-BOOTSTRAP.md"
 
 function Get-Utf8Text([string]$Url) {
-    $r = Invoke-WebRequest -UseBasicParsing -Uri $Url
-    if (-not $r.Content) { throw "Empty response: $Url" }
-    return [string]$r.Content
+    # Windows PowerShell 5.1 can misdecode UTF-8 text returned through
+    # Invoke-WebRequest.Content when the response has no BOM. Download raw bytes
+    # and decode them explicitly as UTF-8 instead.
+    $client = New-Object System.Net.WebClient
+    try {
+        $bytes = $client.DownloadData($Url)
+    } finally {
+        $client.Dispose()
+    }
+    if (-not $bytes -or $bytes.Length -eq 0) { throw "Empty response: $Url" }
+    $text = [System.Text.Encoding]::UTF8.GetString($bytes)
+    if ($text.Length -gt 0 -and [int][char]$text[0] -eq 0xFEFF) {
+        $text = $text.Substring(1)
+    }
+    return $text
 }
 
 function Write-Utf8NoBom([string]$Path, [string]$Text) {
@@ -23,6 +36,13 @@ function Write-Utf8NoBom([string]$Path, [string]$Text) {
     [System.IO.File]::WriteAllText($Path, $Text, $utf8)
 }
 
+# GitHub requires TLS 1.2 on older Windows PowerShell/.NET configurations.
+try {
+    [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
+} catch {
+    # Continue on runtimes where this setting is unavailable.
+}
+
 # Fetch and validate everything before touching local Codex configuration.
 $SkillText = Get-Utf8Text $SkillUrl
 $AgentYamlText = Get-Utf8Text $AgentYamlUrl
@@ -30,8 +50,9 @@ $BootstrapText = Get-Utf8Text $BootstrapUrl
 
 if ($SkillText -notmatch 'name:\s*dollars-localization-bootstrap') { throw 'Unexpected SKILL.md content.' }
 if ($AgentYamlText -notmatch 'allow_implicit_invocation:\s*true') { throw 'Implicit invocation policy missing.' }
-if ($BootstrapText -notmatch 'Codex 한글화 프로젝트 부트스트랩') { throw 'Unexpected bootstrap content.' }
-if ($BootstrapText -notmatch 'D:\\Codex\\한글화 프로젝트') { throw 'Localization project root rule missing from bootstrap.' }
+if ($BootstrapText -notmatch 'workflow/PROJECT-OPERATING-MODEL\.md') { throw 'Bootstrap operating-model link is missing.' }
+if ($BootstrapText -notmatch 'GPT-5\.6 Sol / High') { throw 'Bootstrap model-routing rule is missing.' }
+if ($BootstrapText -notmatch 'DevSpace Tunnel / Web GPT') { throw 'Bootstrap Web GPT delegation section is missing.' }
 
 $HomeDir = [Environment]::GetFolderPath('UserProfile')
 if (-not $HomeDir) { throw 'Could not resolve user profile.' }
@@ -54,7 +75,7 @@ $End = '<!-- dollars-localization-bootstrap:end -->'
 $Block = @"
 $Start
 ## Game localization auto-bootstrap
-When the user starts, continues, reviews, debugs, or plans a game Korean-localization / 한글화 / 한글패치 task, load and follow the personal skill at:
+When the user starts, continues, reviews, debugs, or plans a Korean game localization, translation review, localization patch, patch-engineering, or localization HD Pack task, load and follow the personal skill at:
 $SkillFile
 Do this before planning or modifying the localization project. Do not ask the user to provide the bootstrap GitHub link again. The skill must read the latest canonical GitHub bootstrap when available and use its local snapshot only as fallback.
 This managed block applies only to game localization work and does not change unrelated Codex tasks.
@@ -98,7 +119,7 @@ if ($StartCount -eq 1) {
 
 Write-Utf8NoBom $AgentsFile $NewAgents
 
-# Fresh verification.
+# Fresh verification using ASCII anchors only.
 $VerifyAgents = [System.IO.File]::ReadAllText($AgentsFile)
 $VerifySkill = [System.IO.File]::ReadAllText($SkillFile)
 $VerifySnapshot = [System.IO.File]::ReadAllText($SnapshotFile)
@@ -107,7 +128,8 @@ if ([regex]::Matches($VerifyAgents, $EscStart).Count -ne 1) { throw 'Global AGEN
 if ([regex]::Matches($VerifyAgents, $EscEnd).Count -ne 1) { throw 'Global AGENTS managed block end marker verification failed.' }
 if ($VerifyAgents -notmatch [regex]::Escape($SkillFile)) { throw 'Installed skill path is missing from global AGENTS.' }
 if ($VerifySkill -notmatch 'dollars-localization-bootstrap') { throw 'Installed skill verification failed.' }
-if ($VerifySnapshot -notmatch 'Codex 한글화 프로젝트 부트스트랩') { throw 'Bootstrap snapshot verification failed.' }
+if ($VerifySnapshot -notmatch 'workflow/PROJECT-OPERATING-MODEL\.md') { throw 'Bootstrap snapshot verification failed.' }
+if ($VerifySnapshot -notmatch 'GPT-5\.6 Sol / High') { throw 'Bootstrap snapshot routing verification failed.' }
 
 $Hash = (Get-FileHash -Algorithm SHA256 $SnapshotFile).Hash.ToLowerInvariant()
 
@@ -117,4 +139,4 @@ Write-Host "Skill: $SkillFile"
 Write-Host "Global instructions: $AgentsFile"
 Write-Host "Bootstrap snapshot SHA-256: $Hash"
 Write-Host 'Restart Codex or start a new Codex session before testing the trigger.'
-Write-Host 'Test phrase: 한글화 작업할 거야'
+Write-Host 'Test with any normal game-localization request.'
