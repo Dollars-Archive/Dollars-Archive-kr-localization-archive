@@ -25,7 +25,8 @@
 
 - [Codex 한글화 프로젝트 부트스트랩](https://dollars-archive.github.io/Dollars-Archive-kr-localization-archive/doc.html?file=CODEX-LOCALIZATION-BOOTSTRAP.md)
   - 게임별 프로젝트·검수 프로그램 분리
-  - GPT-5.6 Sol / Luna 역할 분담
+  - **Codex GPT-5.6 Sol / Medium 직접 작업이 기본, Web GPT는 사용자 명시 요청 시에만 호출**
+  - Luna는 저위험 반복 작업 보조이며 자동 Web 위임은 사용하지 않음
   - Google Drive 기반 1차·2차·3차 검수 구조
   - 용어집·캐릭터·관계도·말투 기준 자료 운영
   - 최종 CSV 반영과 실제 플레이 피드백 우선순위
