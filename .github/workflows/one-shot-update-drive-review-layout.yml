@@ -52,8 +52,9 @@ jobs:
               raise SystemExit('old Drive flow block not found')
           s = s.replace(old_flow, new_flow, 1)
 
-          if '03_검수_수정_CSV' in s:
-              raise SystemExit('legacy 03_검수_수정_CSV reference still remains')
+          # Any remaining legacy label elsewhere in this document refers to the 1st-pass folder.
+          s = s.replace('03_검수_수정_CSV', '03_1차_검수_수정_CSV')
+
           if 'F:\\내 드라이브\\검수 프로그램' in s:
               raise SystemExit('PC-specific Drive path unexpectedly remains')
 
