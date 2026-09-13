@@ -1,0 +1,62 @@
+name: Apply Sol Medium and opt-in Web policy
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/one-shot-manual-web-policy-20260913.yml
+permissions:
+  contents: write
+concurrency:
+  group: localization-manual-web-policy-20260913
+  cancel-in-progress: false
+jobs:
+  patch-policy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Apply guarded policy changes
+        run: python scripts/apply-manual-web-policy-20260913.py
+      - name: Verify scope and formatting
+        shell: bash
+        run: |
+          git diff --check
+          python - <<'PY'
+          import importlib.util
+          import subprocess
+          from pathlib import Path
+          spec = importlib.util.spec_from_file_location('policy_patch', 'scripts/apply-manual-web-policy-20260913.py')
+          module = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(module)
+          expected = set(module.EXPECTED)
+          actual = set(subprocess.check_output(['git', 'diff', '--name-only'], text=True).splitlines())
+          assert actual == expected, (actual, expected)
+          before = {p: subprocess.check_output(['git', 'show', 'HEAD:' + p]).decode('utf-8') for p in expected}
+          after = {p: Path(p).read_text(encoding='utf-8') for p in expected}
+          module.verify(before, after)
+          assert module.once('a:b', 'a', 'x') == 'x:b'
+          for invalid in ('none', 'a a'):
+              try:
+                  module.once(invalid, 'a', 'b')
+              except ValueError:
+                  pass
+              else:
+                  raise AssertionError('Exact-anchor guard failed')
+          for p in ('workflow/SOL-LUNA-AGENT-POLICY.md', 'workflow/WEB-SOL-DEVSPACE-OPERATING-CONTRACT.md'):
+              assert Path(p).is_file()
+          print('SCOPE_AND_POLICY_PASS: exactly 8 intended documents')
+          PY
+          git diff --stat
+      - name: Commit policy and remove owned helpers
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git rm -- scripts/apply-manual-web-policy-20260913.py .github/workflows/one-shot-manual-web-policy-20260913.yml
+          git add -- CODEX-LOCALIZATION-BOOTSTRAP.md workflow/SOL-LUNA-AGENT-POLICY.md workflow/PROJECT-OPERATING-MODEL.md workflow/WEB-SOL-DEVSPACE-OPERATING-CONTRACT.md templates/AGENTS.template.md codex-auto-trigger/SKILL.md codex-auto-trigger/agents/openai.yaml README.md
+          git diff --cached --check
+          git commit -m 'docs: default to Sol Medium and make Web GPT opt-in'
+          git push origin HEAD:main
