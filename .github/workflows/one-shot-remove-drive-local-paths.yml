@@ -56,7 +56,12 @@ jobs:
                   raise SystemExit(f'expected text not found: {old}')
               s = s.replace(old, new, 1)
 
-          if 'F:\\내 드라이브\\검수 프로그램' in s:
+          # 혹시 다른 문장에 같은 로컬 동기화 접두사가 남아 있으면
+          # Google Drive 내부 상대경로만 남기고 PC 드라이브 문자는 제거한다.
+          s = s.replace('F:\\내 드라이브\\검수 프로그램\\', '')
+          s = s.replace('F:\\내 드라이브\\검수 프로그램', 'Google Drive 검수 작업공간')
+
+          if 'F:\\내 드라이브' in s:
               raise SystemExit('PC-specific Google Drive path still remains')
 
           p.write_text(s, encoding='utf-8')
