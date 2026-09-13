@@ -1,0 +1,77 @@
+name: One-shot remove local Drive path references
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/one-shot-remove-drive-local-paths.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Remove PC-specific Google Drive paths
+        shell: bash
+        run: |
+          set -euo pipefail
+          git pull --ff-only origin main
+          python - <<'PY'
+          from pathlib import Path
+
+          p = Path('CODEX-LOCALIZATION-BOOTSTRAP.md')
+          s = p.read_text(encoding='utf-8')
+
+          replacements = [
+              (
+                  '11. F:\\내 드라이브\\검수 프로그램\\<게임명>에 용어집·필수파일·분류 CSV를 준비하고 동기화/재조회를 확인한다',
+                  '11. 게임별 Google Drive 검수 작업공간에 용어집·필수파일·분류 CSV를 준비하고 동기화/재조회를 확인한다',
+              ),
+              (
+                  'PC 동기화 상위 루트:\n\n```text\nF:\\내 드라이브\\검수 프로그램\n```\n\n',
+                  '',
+              ),
+              (
+                  '```text\nF:\\내 드라이브\\검수 프로그램\\<게임명>\\\n├─ 01_최신_용어집\n├─ 02_검수_필수파일\n└─ 03_검수_수정_CSV\n```',
+                  '```text\n<게임명>/\n├─ 01_최신_용어집\n├─ 02_검수_필수파일\n└─ 03_검수_수정_CSV\n```',
+              ),
+              (
+                  '기존 게임 폴더가 이미 있으면 새 구조를 중복 생성하거나 강제 재배치하지 않고 동일 역할의 기존 폴더를 사용합니다. 예를 들어 로터스의 실제 검수 필수파일 위치는 `F:\\내 드라이브\\검수 프로그램\\이상한 환상향 로터스 라비린스\\02_검수_필수파일`입니다.',
+                  '기존 게임 폴더가 이미 있으면 새 구조를 중복 생성하거나 강제 재배치하지 않고 동일 역할의 기존 폴더를 사용합니다. 예를 들어 로터스의 실제 검수 필수파일 위치는 Google Drive 작업공간 기준 `이상한 환상향 로터스 라비린스/02_검수_필수파일`입니다.',
+              ),
+              (
+                  '→ F:\\내 드라이브\\검수 프로그램\\<게임명>에 최신 용어집·필수파일·분류 CSV 준비',
+                  '→ 게임별 Google Drive 검수 작업공간에 최신 용어집·필수파일·분류 CSV 준비',
+              ),
+          ]
+
+          for old, new in replacements:
+              if old not in s:
+                  raise SystemExit(f'expected text not found: {old}')
+              s = s.replace(old, new, 1)
+
+          if 'F:\\내 드라이브\\검수 프로그램' in s:
+              raise SystemExit('PC-specific Google Drive path still remains')
+
+          p.write_text(s, encoding='utf-8')
+          PY
+
+          rm .github/workflows/one-shot-remove-drive-local-paths.yml
+
+      - name: Commit and push
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --check
+          git diff --cached -- CODEX-LOCALIZATION-BOOTSTRAP.md
+          git commit -m "docs: remove PC-specific Google Drive paths"
+          git push origin HEAD:main
