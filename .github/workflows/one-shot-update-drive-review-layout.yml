@@ -1,0 +1,74 @@
+name: One-shot update Drive review layout
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/one-shot-update-drive-review-layout.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Update Google Drive review folder layout
+        shell: bash
+        run: |
+          set -euo pipefail
+          git pull --ff-only origin main
+          python - <<'PY'
+          from pathlib import Path
+
+          p = Path('CODEX-LOCALIZATION-BOOTSTRAP.md')
+          s = p.read_text(encoding='utf-8')
+
+          old_structure = '''게임별 기본 실사용 구조:\n\n```text\n<게임명>/\n├─ 01_최신_용어집\n├─ 02_검수_필수파일\n└─ 03_검수_수정_CSV\n```'''
+          new_structure = '''게임별 기본 실사용 구조는 다음 5개 폴더를 기본값으로 사용합니다. PC 동기화 드라이브 문자나 로컬 절대 경로가 아니라 **Google Drive 안의 게임별 작업공간 자체**를 기준으로 봅니다.\n\n```text\n<게임명>/\n├─ 01_최신_용어집\n├─ 02_검수_필수파일\n├─ 03_1차_검수_수정_CSV\n├─ 04_2차_검수_수정_CSV\n└─ 05_3차_검수_수정_CSV\n```'''
+          if old_structure not in s:
+              raise SystemExit('old Drive folder structure not found')
+          s = s.replace(old_structure, new_structure, 1)
+
+          old_required = '''- `layout_profile` 또는 동등 출력/진행 규격\n- `[n]`, 반각/전각, 가로폭, 최대 줄 수, RSC/인코딩 보호 규칙\n- 1차 1,000행 전용 지시문\n- 2차 1,000행 전용 지시문\n- 3차 500행 전용 지시문\n\n1차·2차·3차 지시문은 물리적으로 분리하고 서로의 지시문을 섞지 않습니다.\n\n단, **1차·2차·3차 검수 모두 `01_최신_용어집`을 공통 기준으로 반드시 참고합니다.** 캐릭터명·아이템명·지명·스킬명·시스템명 등 이미 확정된 고정 용어는 각 차수에서 임의로 다른 번역으로 바꾸지 않습니다. 새 용어가 발견되거나 기존 확정 용어와 실제 원문이 충돌하는 경우에만 후보 / `provisional` / `HOLD`로 올려 재검토합니다.\n\n### `03_검수_수정_CSV`\n\n게임 전용 검수 프로그램의 최신 원장에서 내보낸 검수용 CSV를 둡니다. 단순 일본어 문장 덤프를 사용하지 않습니다.\n\n최소 유지 정보:\n\n```text\nrow_key\njapanese_source\ncategory\nsubcategory\nspeaker\nlistener\ncontrol_tokens\ncurrent_translation\nreview_status\n```'''
+          new_required = '''- `layout_profile` 또는 동등 출력/진행 규격\n- `[n]`, 반각/전각, 가로폭, 최대 줄 수, RSC/인코딩 보호 규칙\n\n### `03_1차_검수_수정_CSV`\n\n1차 검수에 사용할 분류된 원장 CSV와 **1차 1,000행 전용 지시문**을 함께 둡니다. 1차 지시문은 구조·관계·존대·용어·기초 형식 검수에 맞춘 내용만 포함하고, 2차·3차 지시문을 참조하거나 섞지 않습니다.\n\n### `04_2차_검수_수정_CSV`\n\n1차 전체 검수가 끝난 결과 CSV와 **2차 1,000행 전용 지시문**을 함께 둡니다. 2차 지시문은 1차에서 확정한 기준을 유지하면서 자연스러운 한국어·문장 흐름·캐릭터 말투를 다듬는 목적에 맞추며, 1차·3차 지시문을 참조하거나 섞지 않습니다.\n\n### `05_3차_검수_수정_CSV`\n\n2차 전체 검수가 끝난 결과 CSV와 **3차 500행 전용 지시문**을 함께 둡니다. 3차 지시문은 최종 문맥·톤·문장 완성도와 검증된 출력 규격 안에서의 세밀 검수에 맞추며, 1차·2차 지시문을 참조하거나 섞지 않습니다.\n\n**1차·2차·3차 지시문은 각 차수 폴더 안에 물리적으로 분리해서 둡니다.** 각 단계는 자기 폴더의 전용 지시문만 사용하고 다른 차수의 지시문을 상호 참조하지 않습니다. 단, 세 차수 모두 `01_최신_용어집`과 `02_검수_필수파일`은 공통 기준으로 참고합니다.\n\n캐릭터명·아이템명·지명·스킬명·시스템명 등 이미 확정된 고정 용어는 각 차수에서 임의로 다른 번역으로 바꾸지 않습니다. 새 용어가 발견되거나 기존 확정 용어와 실제 원문이 충돌하는 경우에만 후보 / `provisional` / `HOLD`로 올려 재검토합니다.\n\n각 차수 CSV는 게임 전용 검수 프로그램의 안정 `row_key`와 분류를 가진 원장에서 출발해야 하며, 단순 일본어 문장 덤프를 사용하지 않습니다. 최소 유지 정보:\n\n```text\nrow_key\njapanese_source\ncategory\nsubcategory\nspeaker\nlistener\ncontrol_tokens\ncurrent_translation\nreview_status\n```'''
+          if old_required not in s:
+              raise SystemExit('old Drive stage instruction block not found')
+          s = s.replace(old_required, new_required, 1)
+
+          old_gate = '''1. 정확한 게임별 Drive 작업공간 확인\n2. `01_최신_용어집` 최신화\n3. `02_검수_필수파일` 최신화\n4. `03_검수_수정_CSV`에 분류된 원장 CSV 준비\n5. Google Drive 동기화 확인\n6. 등록 파일을 다시 읽어 실제 반영 확인'''
+          new_gate = '''1. 정확한 게임별 Drive 작업공간 확인\n2. `01_최신_용어집` 최신화\n3. `02_검수_필수파일` 최신화\n4. `03_1차_검수_수정_CSV` / `04_2차_검수_수정_CSV` / `05_3차_검수_수정_CSV` 기본 폴더 생성\n5. 각 차수 폴더에 해당 차수 전용 지시문 배치 및 다른 차수 지시문과 분리 확인\n6. `03_1차_검수_수정_CSV`에 1차 시작용 분류 원장 CSV 준비\n7. Google Drive 동기화 확인\n8. 등록 파일을 다시 읽어 실제 반영 확인'''
+          if old_gate not in s:
+              raise SystemExit('old hard gate block not found')
+          s = s.replace(old_gate, new_gate, 1)
+
+          old_flow = '''```text\n1차: 전체 대사집을 1,000행 단위로 처음부터 끝까지 검수\n→ 2차: 1차 전체 결과를 다시 1,000행 단위로 처음부터 끝까지 검수\n→ 3차: 2차 전체 결과를 다시 500행 단위로 최종 정밀검수\n→ <게임약칭>_최종대사_수정_누적.csv\n→ 게임 전용 검수 프로그램 최신 원장 반입\n```'''
+          new_flow = '''```text\n03_1차_검수_수정_CSV: 전체 대사집을 1,000행 단위로 처음부터 끝까지 검수\n→ 04_2차_검수_수정_CSV: 1차 전체 결과를 다시 1,000행 단위로 처음부터 끝까지 검수\n→ 05_3차_검수_수정_CSV: 2차 전체 결과를 다시 500행 단위로 최종 정밀검수\n→ <게임약칭>_최종대사_수정_누적.csv\n→ 게임 전용 검수 프로그램 최신 원장 반입\n```'''
+          if old_flow not in s:
+              raise SystemExit('old Drive flow block not found')
+          s = s.replace(old_flow, new_flow, 1)
+
+          if '03_검수_수정_CSV' in s:
+              raise SystemExit('legacy 03_검수_수정_CSV reference still remains')
+          if 'F:\\내 드라이브\\검수 프로그램' in s:
+              raise SystemExit('PC-specific Drive path unexpectedly remains')
+
+          p.write_text(s, encoding='utf-8')
+          PY
+          rm .github/workflows/one-shot-update-drive-review-layout.yml
+
+      - name: Commit and push
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --check
+          git diff --cached -- CODEX-LOCALIZATION-BOOTSTRAP.md
+          git commit -m "docs: define staged Drive review folders"
+          git push origin HEAD:main
