@@ -36,6 +36,18 @@ const docs = [
     description: 'INSTALL.md 단일 원본과 게임별 테마 Pages 설명서를 연결하는 표준.',
   },
   {
+    group: 'CODEX / WEB GPT',
+    title: 'Codex → 웹 GPT 한글화 외주',
+    file: 'workflow/WEB-SOL-DEVSPACE-OPERATING-CONTRACT.md',
+    description: '사용자가 지정한 웹 GPT에 분석·구현을 맡기는 연결·결과 회수 절차. 기존 Oracle·DevSpace 경로의 참고 기록.',
+  },
+  {
+    group: 'GPT / GOOGLE DRIVE',
+    title: 'GPT 대사 번역·검수 양식',
+    file: 'templates/drive-review/README.md',
+    description: 'Drive에서 500행씩 1차 번역·2차 화자와 용어·3차 출력 규격 검수를 진행하는 공통 양식.',
+  },
+  {
     group: 'NINTENDO SWITCH',
     title: 'Nintendo Switch 한국어 패치 제작 워크플로',
     file: 'switch/SWITCH-KOREAN-LOCALIZATION-GUIDE.md',
@@ -57,6 +69,7 @@ function renderIndex() {
   const sections = [
     { id: 'doc-grid', files: ['CODEX-LOCALIZATION-BOOTSTRAP.md', 'CLAUDE-LOCALIZATION-BOOTSTRAP.md'] },
     { id: 'operations-grid', files: ['workflow/PUBLIC-WORKLOG-STANDARD.md', 'workflow/CODEX-CLAUDE-TEAM-RECOVERY.md'] },
+    { id: 'web-gpt-grid', files: ['workflow/WEB-SOL-DEVSPACE-OPERATING-CONTRACT.md', 'templates/drive-review/README.md'] },
     { id: 'github-grid', files: ['GPT-GITHUB-OPERATIONS.md', 'workflow/GITHUB-PAGES-INSTALL-GUIDE-STANDARD.md'] },
     { id: 'platform-grid', files: ['switch/SWITCH-KOREAN-LOCALIZATION-GUIDE.md'] },
   ];

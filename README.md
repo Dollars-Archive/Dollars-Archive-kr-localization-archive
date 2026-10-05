@@ -14,7 +14,9 @@
 
 ## 문서 목록
 
-웹 대문은 **한글화 프로젝트**(GPT 선임·Claude 선임), **프로젝트 운영**(공개 작업일지·Codex ↔ Claude 연결), **GitHub 운영**(GitHub 작업·Pages 설치 가이드), **기종별 기술 문서**(Nintendo Switch) 순서로 표시합니다. **문서 카드는 PC에서 항상 2열, 모바일에서 1열**로 구성하며 3열 배치는 사용하지 않습니다. 문서를 추가할 때도 이 배치 규칙을 유지합니다.
+웹 대문은 **한글화 프로젝트**(GPT 선임·Claude 선임), **프로젝트 운영**(공개 작업일지·Codex ↔ Claude 연결), **웹 GPT 작업**(Codex 외주·Drive 번역·검수), **GitHub 운영**(GitHub 작업·Pages 설치 가이드), **기종별 기술 문서**(Nintendo Switch) 순서로 표시합니다. **문서 카드는 PC에서 항상 2열, 모바일에서 1열**로 구성하며 3열 배치는 사용하지 않습니다. 문서를 추가할 때도 이 배치 규칙을 유지합니다.
+
+대문 스크립트·스타일을 수정할 때는 `docs/index.html`과 `docs/doc.html`의 자산 URL에 붙인 `v=` 값을 함께 갱신합니다. 이전 스크립트 캐시가 새 HTML에 적용되어 카드 구성이 섞이는 것을 방지합니다.
 
 ### GPT / GitHub 운용
 
@@ -37,6 +39,14 @@
   - Claude가 진행 관리·실제 구현을 맡고 Codex에 테스트 ROM·패처 제작을 의뢰
   - Google Drive 웹 GPT의 대사 1·2·3차 검수와 기존 실기 확인 순서 유지
   - 선택한 프로젝트에서만 적용, 기존 Codex 운영 방식과 자동 전환 없음
+
+### Codex → 웹 GPT 외주 / Drive 번역·검수
+
+- [Codex → 웹 GPT 한글화 외주](https://dollars-archive.github.io/Dollars-Archive-kr-localization-archive/doc.html?file=workflow%2FWEB-SOL-DEVSPACE-OPERATING-CONTRACT.md)
+  - 사용자가 명시적으로 선택한 외주 경로의 연결·작업 인계·결과 검증
+  - 기존 Oracle·DevSpace 경로의 과거 검증 기록이며, 현재 환경의 동작 확인이나 자동 실행 승인을 뜻하지 않음
+- [GPT 대사 번역·검수 양식](https://dollars-archive.github.io/Dollars-Archive-kr-localization-archive/doc.html?file=templates%2Fdrive-review%2FREADME.md)
+  - 모든 차수 최대 500행, Drive에서 1·2·3차 진행
 
 ### 공개 작업일지
 
