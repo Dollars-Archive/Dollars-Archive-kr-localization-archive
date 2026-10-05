@@ -12,10 +12,16 @@ const docs = [
     description: 'GPT가 GitHub 파일·Release를 안전하게 수정하고 검증하는 운영 절차.',
   },
   {
-    group: 'LOCALIZATION BOOTSTRAP',
-    title: 'Codex 한글화 프로젝트 부트스트랩',
+    group: 'GPT LEAD',
+    title: '한글화 프로젝트 · GPT 선임',
     file: 'CODEX-LOCALIZATION-BOOTSTRAP.md',
-    description: '게임별 프로젝트 구조, 검수 단계, 자료 관리와 에이전트 역할 분담.',
+    description: 'GPT·Codex가 프로젝트를 관리하고 Claude와 분석·검토를 주고받는 작업 순서.',
+  },
+  {
+    group: 'CLAUDE LEAD',
+    title: '한글화 프로젝트 · Claude 선임',
+    file: 'CLAUDE-LOCALIZATION-BOOTSTRAP.md',
+    description: 'Claude가 진행 관리·구현을 맡고 Codex에 테스트 ROM·패처 제작을 의뢰하는 작업 순서.',
   },
   {
     group: 'PROJECT / WORKLOG',
@@ -49,8 +55,9 @@ function viewerUrl(file) {
 
 function renderIndex() {
   const sections = [
-    { id: 'doc-grid', files: ['GPT-GITHUB-OPERATIONS.md', 'CODEX-LOCALIZATION-BOOTSTRAP.md', 'workflow/CODEX-CLAUDE-TEAM-RECOVERY.md'] },
-    { id: 'operations-grid', files: ['workflow/PUBLIC-WORKLOG-STANDARD.md', 'workflow/GITHUB-PAGES-INSTALL-GUIDE-STANDARD.md'] },
+    { id: 'doc-grid', files: ['CODEX-LOCALIZATION-BOOTSTRAP.md', 'CLAUDE-LOCALIZATION-BOOTSTRAP.md'] },
+    { id: 'operations-grid', files: ['workflow/PUBLIC-WORKLOG-STANDARD.md', 'workflow/CODEX-CLAUDE-TEAM-RECOVERY.md'] },
+    { id: 'github-grid', files: ['GPT-GITHUB-OPERATIONS.md', 'workflow/GITHUB-PAGES-INSTALL-GUIDE-STANDARD.md'] },
     { id: 'platform-grid', files: ['switch/SWITCH-KOREAN-LOCALIZATION-GUIDE.md'] },
   ];
   for (const section of sections) {
