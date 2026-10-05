@@ -521,11 +521,18 @@ AI 제안은 최종 진실로 취급하지 않습니다.
 
 ## 공개 패치 저장소의 대문 공통 양식
 
+### 새 패치 저장소의 공략집 등록 안내
+
+신규 공개 패치 저장소 생성은 README의 공략집 등록 지침 연결까지 포함합니다. `templates/README.template.md`의 안내를 보존하고 `REPOSITORY_NAME`을 실제 저장소 이름으로 바꿉니다. `templates/ensure_guide_registration.py`를 `.github/scripts/ensure_guide_registration.py`, `templates/guide-registration.yml`을 `.github/workflows/guide-registration.yml`로 함께 복사합니다. 첫 커밋 전에 `python .github/scripts/ensure_guide_registration.py --repo Dollars-Archive/실제저장소이름`을 실행합니다.
+
+워크플로는 기본 브랜치 푸시와 수동 실행 때 누락된 연결만 자동으로 추가합니다. 기존 안내가 있으면 아무것도 변경하지 않습니다. 신규 저장소 생성 완료 전에 지침 주소·patch_repo·워크플로 실행 성공을 확인하며, 사용자가 따로 지침을 첨부하도록 요구하지 않습니다. 공략 등록 요청은 https://github.com/Dollars-Archive/Game-Walkthrough-Archive/blob/main/REGISTER-GUIDE.md 를 직접 읽고 처리합니다. 별도 PAT 없이 자기 저장소의 GITHUB_TOKEN을 사용합니다. 세부 절차는 `workflow/PATCH-README-STANDARD.md`에 있습니다.
+
+
 새 한국어화 프로젝트에 공개 패치 저장소를 만들거나 README를 처음 준비할 때는 반드시 `templates/README.template.md`를 사용합니다. 사용자에게 다시 양식을 정해 달라고 요청하지 않습니다. 게임명과 `REPOSITORY_NAME`을 실제 값으로 바꾸고, 공개 패치 저장소에는 `kr-patch` topic을 붙입니다. 후보 조사만 하는 아카이브에는 붙이지 않습니다.
 
 게임 정보는 티어즈 투 티아라 형식의 항목·내용 표로 작성합니다. 원제·플랫폼·개발사·장르·일본 발매일·플레이타임·지원 판본을 포함하고, 해당하는 Title ID·제품 번호·패치 기준 업데이트·CERO는 보존합니다. 확인한 출처에 따라 값을 채우고 모르는 값은 `—`로 남깁니다. 플레이타임은 완전 클리어 또는 본편 등 기준을 확인할 수 있으면 함께 적습니다. 추측해서 채우지 않습니다.
 
-한글화 범위는 `타이틀 한글화` → `메뉴·UI` → `대사` → `이미지 번역` → `동영상 자막`의 다섯 제목으로 고정합니다. 각 항목 바로 아래에 `상태: 완료`, `상태: 일부`, `상태: 미작업`, `상태: 해당 없음` 중 하나를 입력합니다. 제목이 있거나 스크린샷이 있다는 이유만으로 완료로 표시하지 않습니다. 기존 자료로 판단이 어려운 경우만 `상태: 확인 필요`로 남기고 확인할 항목을 보고합니다.
+한글화 범위는 `타이틀 한글화` → `메뉴·UI` → `대사` → `이미지 번역` → `동영상 자막`의 다섯 제목으로 고정합니다. 각 항목 바로 아래의 숨김 주석 `<!-- kr-patch:state: 완료 -->`에 완료·일부·미작업·해당 없음 중 하나를 입력합니다. 공개 화면에 `상태: 완료` 같은 문구를 추가하거나 복원하지 않습니다. 제목이 있거나 스크린샷이 있다는 이유만으로 완료로 표시하지 않습니다. 기존 자료로 판단이 어려운 경우만 숨김 주석의 `확인 필요`로 남기고 확인할 항목을 보고합니다.
 
 허브는 README의 `kr-patch:game-info:v1` 및 `kr-patch:scope:v1` 주석 사이를 읽습니다. 주석과 표 항목·다섯 제목을 유지하며, 게임 정보·현재 범위를 허브 patches.yml에 중복 입력하지 않습니다. README를 저장하면 허브의 매시 23분 예약 실행 때 갱신됩니다. 표지 출처와 버전별 변경 이력은 기존 patches.yml에서 관리하며, 과거 기록을 추측하거나 덮어쓰지 않습니다.
 
