@@ -31,6 +31,13 @@
   - [Google Drive 공통 양식](templates/drive-review/README.md): 전체 지시문과 빈 CSV
   - [프로젝트 공통 지시문](templates/PROJECT-INSTRUCTIONS.md) / [진행상태 양식](templates/진행상태.template.md)
 
+### Claude 담당자 방식의 한글화 프로젝트
+
+- [Claude 한글화 프로젝트 부트스트랩](https://dollars-archive.github.io/Dollars-Archive-kr-localization-archive/doc.html?file=CLAUDE-LOCALIZATION-BOOTSTRAP.md)
+  - Claude가 진행 관리·실제 구현을 맡고 Codex에 테스트 ROM·패처 제작을 의뢰
+  - Google Drive 웹 GPT의 대사 1·2·3차 검수와 기존 실기 확인 순서 유지
+  - 선택한 프로젝트에서만 적용, 기존 Codex 운영 방식과 자동 전환 없음
+
 ### 공개 작업일지
 
 - [공개 작업일지 운영 표준](https://dollars-archive.github.io/Dollars-Archive-kr-localization-archive/doc.html?file=workflow%2FPUBLIC-WORKLOG-STANDARD.md)
