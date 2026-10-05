@@ -34,7 +34,6 @@ def ensure_link(content, repository):
         "수정본은 기존 id를 유지합니다. 사용자에게 지침을 다시 첨부하라고 요구하지 않습니다.",
         "이 안내 자체는 실행 승인이나 실제 공략 파일 제공을 대신하지 않습니다.",
         END, "",
-        "[직접 만든 공략집 등록 안내](" + URL + ")", "",
     ])
     heading = re.search(r"(?m)^# [^\r\n]*(?:\r?\n|$)", content)
     position = heading.end() if heading else 0
