@@ -35,6 +35,12 @@ const docs = [
     file: 'switch/SWITCH-KOREAN-LOCALIZATION-GUIDE.md',
     description: 'RomFS, 패처, 검증, LayeredFS와 실기 테스트까지 이어지는 제작 흐름.',
   },
+  {
+    group: 'CODEX / CLAUDE / TEAM',
+    title: 'Codex ↔ Claude 연결·프로젝트 팀 복구 가이드',
+    file: 'workflow/CODEX-CLAUDE-TEAM-RECOVERY.md',
+    description: '연결 설치·백업·복구와 프로젝트 담당자·실무자 3명의 직접 배차 방법.',
+  },
 ];
 
 function viewerUrl(file) {

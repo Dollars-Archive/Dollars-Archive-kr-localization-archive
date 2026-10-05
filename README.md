@@ -57,6 +57,14 @@
   - 실기·Windows·Android 검수
   - 공개 저장소에 올리면 안 되는 자료 체크리스트
 
+### Codex ↔ Claude 연결·프로젝트 팀 복구
+
+- [Codex ↔ Claude 연결·프로젝트 팀 복구 가이드](https://dollars-archive.github.io/Dollars-Archive-kr-localization-archive/doc.html?file=workflow%2FCODEX-CLAUDE-TEAM-RECOVERY.md)
+  - 검증된 브리지 소스·정션 수정본·해시를 보관한 복구 자료
+  - 초기화 후 재설치·재연결·최소화 왕복 확인
+  - 독립 담당자 1명과 주 워커·이미지·동영상 실무자 3명 지정
+  - Claude 분석·검토와 실무자 배차·회수 프롬프트
+
 ## 기본 원칙
 
 ```text

@@ -1,0 +1,28 @@
+diff --git a/compatibility/native/scripts/mcp.mjs b/compatibility/native/scripts/mcp.mjs
+index d1d36a2..715a38c 100644
+--- a/compatibility/native/scripts/mcp.mjs
++++ b/compatibility/native/scripts/mcp.mjs
+@@ -469,6 +469,8 @@ export async function runMcpServer({ input = process.stdin, output = process.std
+   await done;
+ }
+ 
+-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
++// The Codex profile may be a Windows junction (for example C: -> D:).
++// Node resolves the module URL to its real location, but argv keeps the alias.
++if (process.argv[1] && fs.realpathSync(process.argv[1]) === fs.realpathSync(fileURLToPath(import.meta.url))) {
+   await runMcpServer();
+ }
+diff --git a/scripts/mcp.mjs b/scripts/mcp.mjs
+index d1d36a2..715a38c 100644
+--- a/scripts/mcp.mjs
++++ b/scripts/mcp.mjs
+@@ -469,6 +469,8 @@ export async function runMcpServer({ input = process.stdin, output = process.std
+   await done;
+ }
+ 
+-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
++// The Codex profile may be a Windows junction (for example C: -> D:).
++// Node resolves the module URL to its real location, but argv keeps the alias.
++if (process.argv[1] && fs.realpathSync(process.argv[1]) === fs.realpathSync(fileURLToPath(import.meta.url))) {
+   await runMcpServer();
+ }

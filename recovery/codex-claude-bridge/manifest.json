@@ -1,0 +1,456 @@
+{
+  "schema_version": 1,
+  "recorded_date": "2026-10-05 Asia/Seoul",
+  "upstream": {
+    "repository": "https://github.com/KeeVeeG/codex-claude-desktop-bridge",
+    "version": "0.3.2",
+    "commit": "6fe0663f47b3098f41d315f4ecb8d652f16da0c3",
+    "license": "MIT"
+  },
+  "modifications": {
+    "changed_files": [
+      "scripts/mcp.mjs",
+      "compatibility/native/scripts/mcp.mjs"
+    ],
+    "added_file": "test/junction-startup.test.mjs",
+    "reason": "Resolve both MCP entrypoint paths before comparing Windows junction aliases."
+  },
+  "archive": {
+    "filename": "bridge-source-0.3.2-20261005.zip",
+    "sha256": "55c3612b5b44235ec40f03f5ac199cdb6cdeade2f0de57f6c0d7ebe90c379587",
+    "size_bytes": 248628,
+    "root_directory": "codex-claude-desktop-bridge",
+    "file_count": 79
+  },
+  "patch": {
+    "filename": "windows-junction.patch",
+    "sha256": "0c393dd9ba8b90d92adc42d2ba9d0728aed7973ce76e51a577795323c06ffcf3"
+  },
+  "inclusion": "Tracked upstream source and the explicitly selected local regression test, including LICENSE.",
+  "exclusions": [
+    "Git history",
+    "work and generated release directories",
+    "node_modules",
+    "installed caches",
+    "app settings",
+    "auth files",
+    "message history",
+    "project role IDs"
+  ],
+  "files": [
+    {
+      "path": ".agents/plugins/marketplace.json",
+      "sha256": "2334be31c11f27c093660213ef4adf99cbc4625aa534589befa09168a7464954",
+      "size_bytes": 497
+    },
+    {
+      "path": ".claude-plugin/marketplace.json",
+      "sha256": "a139cf59c4bb9f704e31449790277e8d47c7cdae48ffda9e1978927336b9e73a",
+      "size_bytes": 395
+    },
+    {
+      "path": ".claude-plugin/plugin.json",
+      "sha256": "f899da4ce545d0f475abe4bc7f77e87a6923feee016f17582d8e33ee8067b0c4",
+      "size_bytes": 562
+    },
+    {
+      "path": ".codex-plugin/plugin.json",
+      "sha256": "8cb6b8d5b3f76432081bfef65122fe77f164cb4650e6859e95a676bfbeb44d05",
+      "size_bytes": 2294
+    },
+    {
+      "path": ".gitattributes",
+      "sha256": "db21b2a7c83b2a5c63a31a9d18c6ebac9ade639f1ac92c0dd7c8232ef5c836d4",
+      "size_bytes": 111
+    },
+    {
+      "path": ".github/workflows/test.yml",
+      "sha256": "1e522dab4faaf50c25ab05964bc3a7e1276fde5fd9a48e7029c89faaa118d3c7",
+      "size_bytes": 415
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "828b4ced58f3a9aa4c1a296bdc691a268e9d0aa09c82e56e36d9c417a7ea5f35",
+      "size_bytes": 123
+    },
+    {
+      "path": ".mcp.json",
+      "sha256": "8bb8f39e827959fc0d2169dfc8971068b4e136c7fe0e9139d85752e916f07e8e",
+      "size_bytes": 491
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "70585c33e79b0982c3dda6ae55b2ca3836ccbe5a8f67ec83e2afd7d38839e3c4",
+      "size_bytes": 1064
+    },
+    {
+      "path": "README.md",
+      "sha256": "603f74126e6a37bd6eb0225454baf7ced802503e047c397c48d62a0fe03656f5",
+      "size_bytes": 18368
+    },
+    {
+      "path": "SECURITY.md",
+      "sha256": "4152e9861c5c16146fb7146fb01a671ceeec5b43c2237a5e866601cae4278aa7",
+      "size_bytes": 545
+    },
+    {
+      "path": "assets/bridge-dark.svg",
+      "sha256": "9faa4655657f95f455f9b3e1f3ec5dd2e1893208a9e8daf08da441713be8a07b",
+      "size_bytes": 532
+    },
+    {
+      "path": "assets/bridge.svg",
+      "sha256": "9faa4655657f95f455f9b3e1f3ec5dd2e1893208a9e8daf08da441713be8a07b",
+      "size_bytes": 532
+    },
+    {
+      "path": "compatibility/native/.claude-plugin/plugin.json",
+      "sha256": "f899da4ce545d0f475abe4bc7f77e87a6923feee016f17582d8e33ee8067b0c4",
+      "size_bytes": 562
+    },
+    {
+      "path": "compatibility/native/.codex-plugin/plugin.json",
+      "sha256": "8cb6b8d5b3f76432081bfef65122fe77f164cb4650e6859e95a676bfbeb44d05",
+      "size_bytes": 2294
+    },
+    {
+      "path": "compatibility/native/.mcp.json",
+      "sha256": "8bb8f39e827959fc0d2169dfc8971068b4e136c7fe0e9139d85752e916f07e8e",
+      "size_bytes": 491
+    },
+    {
+      "path": "compatibility/native/LICENSE",
+      "sha256": "70585c33e79b0982c3dda6ae55b2ca3836ccbe5a8f67ec83e2afd7d38839e3c4",
+      "size_bytes": 1064
+    },
+    {
+      "path": "compatibility/native/README.md",
+      "sha256": "603f74126e6a37bd6eb0225454baf7ced802503e047c397c48d62a0fe03656f5",
+      "size_bytes": 18368
+    },
+    {
+      "path": "compatibility/native/SECURITY.md",
+      "sha256": "4152e9861c5c16146fb7146fb01a671ceeec5b43c2237a5e866601cae4278aa7",
+      "size_bytes": 545
+    },
+    {
+      "path": "compatibility/native/assets/bridge-dark.svg",
+      "sha256": "9faa4655657f95f455f9b3e1f3ec5dd2e1893208a9e8daf08da441713be8a07b",
+      "size_bytes": 532
+    },
+    {
+      "path": "compatibility/native/assets/bridge.svg",
+      "sha256": "9faa4655657f95f455f9b3e1f3ec5dd2e1893208a9e8daf08da441713be8a07b",
+      "size_bytes": 532
+    },
+    {
+      "path": "compatibility/native/config/mcp-source.json",
+      "sha256": "8e62660d808b44138d5ca91bc169dc538da2771a790ea1b5e543b2dfad3bc936",
+      "size_bytes": 285
+    },
+    {
+      "path": "compatibility/native/config/plugin-source.json",
+      "sha256": "ade428e01154fe28e521e7b271ea01e6033080832a9eba63a273956c627f4ff6",
+      "size_bytes": 2043
+    },
+    {
+      "path": "compatibility/native/docs/PRIVACY.md",
+      "sha256": "2d58255fb42c13829415ad799b31894681c4cb217e4c0d76f515c39dd4da6a44",
+      "size_bytes": 5727
+    },
+    {
+      "path": "compatibility/native/docs/PUBLISHING.md",
+      "sha256": "5ee9db762f5b999f74ad690e8ea3a203322edf103739a73a5ccf2797b0f0ec3f",
+      "size_bytes": 8457
+    },
+    {
+      "path": "compatibility/native/docs/TERMS.md",
+      "sha256": "c562e20b70a95902596b168fa0568c4dee71a712fcc3c29593b6dadb419592b3",
+      "size_bytes": 721
+    },
+    {
+      "path": "compatibility/native/lib/bridge-history.mjs",
+      "sha256": "91b4b55bdeade38ab40b8a463e98af7929eeb7f8e8e590ae6894117538a8a510",
+      "size_bytes": 14709
+    },
+    {
+      "path": "compatibility/native/lib/claude-desktop.mjs",
+      "sha256": "3f381176acd2e2af32ee28839d0f7af49fbf935ca469597e589197121fe50820",
+      "size_bytes": 15886
+    },
+    {
+      "path": "compatibility/native/lib/claude-history.mjs",
+      "sha256": "2e90a57dd7ba62acad8c975302b2df7a2f6e5e1da7a445e62ebfc2c0360af30b",
+      "size_bytes": 13099
+    },
+    {
+      "path": "compatibility/native/lib/codex-desktop.mjs",
+      "sha256": "a86b503d376d3d5e656afcce6f32636d38be1e6ed0fef72065cd07608dce5ef7",
+      "size_bytes": 9745
+    },
+    {
+      "path": "compatibility/native/lib/codex-host.mjs",
+      "sha256": "6f5775e0349d99864d74fa4e8933e7475ea84d31a1cbade956cb25a4b8a23181",
+      "size_bytes": 6680
+    },
+    {
+      "path": "compatibility/native/lib/codex-settings.mjs",
+      "sha256": "7309342d2aa716860141f184662096a94a5a9a0185fa5ffb58fb10ec6122811a",
+      "size_bytes": 1703
+    },
+    {
+      "path": "compatibility/native/lib/desktop-service.mjs",
+      "sha256": "2c7893ef819351895d25af5770a231f9a3b988e1c167acc97d1a76918c803a63",
+      "size_bytes": 19437
+    },
+    {
+      "path": "compatibility/native/lib/manual-service.mjs",
+      "sha256": "1c934978a50eff9c4894bf1f9b0cf54292edd6d434ea000e4666b66cb06a3cee",
+      "size_bytes": 16656
+    },
+    {
+      "path": "compatibility/native/lib/store.mjs",
+      "sha256": "af14d5fc5da6222f71c5894c9baa29c47993e0005f4d7a3fdfb03c971633e26a",
+      "size_bytes": 18663
+    },
+    {
+      "path": "compatibility/native/package.json",
+      "sha256": "e3b2b2fc520c401b192dab3ce068861abd5f59bd7cc63f659c08de9de0737b87",
+      "size_bytes": 841
+    },
+    {
+      "path": "compatibility/native/scripts/install.mjs",
+      "sha256": "a5de6bb648ed041f30c3474ce657d3c8a854b4e4d4afc96a644185b4d8ddb49a",
+      "size_bytes": 20558
+    },
+    {
+      "path": "compatibility/native/scripts/manifests.mjs",
+      "sha256": "2271f7099a389bd10e4031737d8320be86be9d38573c11626a66b17727fcb6e4",
+      "size_bytes": 11862
+    },
+    {
+      "path": "compatibility/native/scripts/mcp.mjs",
+      "sha256": "28b6af29c114d4982a700d1bb9a96f50795a730e6e70fde57671cfeca8c6b401",
+      "size_bytes": 25944
+    },
+    {
+      "path": "compatibility/native/skills/claude-bridge/SKILL.md",
+      "sha256": "9ae41dd212a5b4cd2c1bb3fd255ec3ee839c64996758ce6acf5800525cfa4a1d",
+      "size_bytes": 7139
+    },
+    {
+      "path": "compatibility/native/ui/bridge.html",
+      "sha256": "30f5e75525210dff8131b316b68e051bb24ff9cb4c49b6440676dd91b34d1274",
+      "size_bytes": 49513
+    },
+    {
+      "path": "docs/PRIVACY.md",
+      "sha256": "2d58255fb42c13829415ad799b31894681c4cb217e4c0d76f515c39dd4da6a44",
+      "size_bytes": 5727
+    },
+    {
+      "path": "docs/PUBLISHING.md",
+      "sha256": "5ee9db762f5b999f74ad690e8ea3a203322edf103739a73a5ccf2797b0f0ec3f",
+      "size_bytes": 8457
+    },
+    {
+      "path": "docs/TERMS.md",
+      "sha256": "c562e20b70a95902596b168fa0568c4dee71a712fcc3c29593b6dadb419592b3",
+      "size_bytes": 721
+    },
+    {
+      "path": "lib/bridge-history.mjs",
+      "sha256": "91b4b55bdeade38ab40b8a463e98af7929eeb7f8e8e590ae6894117538a8a510",
+      "size_bytes": 14709
+    },
+    {
+      "path": "lib/claude-desktop.mjs",
+      "sha256": "3f381176acd2e2af32ee28839d0f7af49fbf935ca469597e589197121fe50820",
+      "size_bytes": 15886
+    },
+    {
+      "path": "lib/claude-history.mjs",
+      "sha256": "2e90a57dd7ba62acad8c975302b2df7a2f6e5e1da7a445e62ebfc2c0360af30b",
+      "size_bytes": 13099
+    },
+    {
+      "path": "lib/codex-desktop.mjs",
+      "sha256": "a86b503d376d3d5e656afcce6f32636d38be1e6ed0fef72065cd07608dce5ef7",
+      "size_bytes": 9745
+    },
+    {
+      "path": "lib/codex-host.mjs",
+      "sha256": "6f5775e0349d99864d74fa4e8933e7475ea84d31a1cbade956cb25a4b8a23181",
+      "size_bytes": 6680
+    },
+    {
+      "path": "lib/codex-settings.mjs",
+      "sha256": "7309342d2aa716860141f184662096a94a5a9a0185fa5ffb58fb10ec6122811a",
+      "size_bytes": 1703
+    },
+    {
+      "path": "lib/desktop-service.mjs",
+      "sha256": "2c7893ef819351895d25af5770a231f9a3b988e1c167acc97d1a76918c803a63",
+      "size_bytes": 19437
+    },
+    {
+      "path": "lib/manual-service.mjs",
+      "sha256": "1c934978a50eff9c4894bf1f9b0cf54292edd6d434ea000e4666b66cb06a3cee",
+      "size_bytes": 16656
+    },
+    {
+      "path": "lib/store.mjs",
+      "sha256": "af14d5fc5da6222f71c5894c9baa29c47993e0005f4d7a3fdfb03c971633e26a",
+      "size_bytes": 18663
+    },
+    {
+      "path": "mcp.json",
+      "sha256": "b057ae85d44d7ce90b55a146445944312d0784e6d6de745b0fd558655b65562a",
+      "size_bytes": 269
+    },
+    {
+      "path": "package.json",
+      "sha256": "e3b2b2fc520c401b192dab3ce068861abd5f59bd7cc63f659c08de9de0737b87",
+      "size_bytes": 841
+    },
+    {
+      "path": "plugin.json",
+      "sha256": "4b64a9a166cc87d78c76208355b1d660c2705a9f48152f3faba093e90a61879e",
+      "size_bytes": 1993
+    },
+    {
+      "path": "scripts/install.mjs",
+      "sha256": "a5de6bb648ed041f30c3474ce657d3c8a854b4e4d4afc96a644185b4d8ddb49a",
+      "size_bytes": 20558
+    },
+    {
+      "path": "scripts/manifests.mjs",
+      "sha256": "2271f7099a389bd10e4031737d8320be86be9d38573c11626a66b17727fcb6e4",
+      "size_bytes": 11862
+    },
+    {
+      "path": "scripts/mcp.mjs",
+      "sha256": "28b6af29c114d4982a700d1bb9a96f50795a730e6e70fde57671cfeca8c6b401",
+      "size_bytes": 25944
+    },
+    {
+      "path": "scripts/package.mjs",
+      "sha256": "ec1c27bde5010508917bcfd9e265ee53660f54767c2cc7724d4d5b2c06c137a9",
+      "size_bytes": 8277
+    },
+    {
+      "path": "scripts/test.mjs",
+      "sha256": "886de6f1aaaccd2f9db910af02a7aa426ff16696a7ccbda62244957c1bc8abe6",
+      "size_bytes": 963
+    },
+    {
+      "path": "skills/claude-bridge/SKILL.md",
+      "sha256": "9ae41dd212a5b4cd2c1bb3fd255ec3ee839c64996758ce6acf5800525cfa4a1d",
+      "size_bytes": 7139
+    },
+    {
+      "path": "test/codex-settings.test.mjs",
+      "sha256": "7c007623a12cad15d61975dab4839199697bfeb75538ac9afa3bd5d9d9396a2e",
+      "size_bytes": 1037
+    },
+    {
+      "path": "test/desktop-transports.test.mjs",
+      "sha256": "5e4606d8cdc4c0c66b2a5d50d6b28ea89815e30a65dd5f30b3364a0f700f4512",
+      "size_bytes": 9980
+    },
+    {
+      "path": "test/diagnostics.test.mjs",
+      "sha256": "2d8e1efe7e62c1fb3a6bdbb4f1243704763a1e98e615a79e39bc4c0cb22c82bf",
+      "size_bytes": 14298
+    },
+    {
+      "path": "test/discovery.test.mjs",
+      "sha256": "39adb1779609224139571e5e851372b645ab5f7051e27ee22f72a5fb91b93c6e",
+      "size_bytes": 8576
+    },
+    {
+      "path": "test/history-roots.test.mjs",
+      "sha256": "e85ded1e867a01cc2b9b48a79b600c150fd5a798d6097ff57f8897f3f208c4cc",
+      "size_bytes": 5344
+    },
+    {
+      "path": "test/history.test.mjs",
+      "sha256": "291ff22032c8556e995ff301966e24bf6cf189a691d74ac1390e32a64e953e4c",
+      "size_bytes": 21574
+    },
+    {
+      "path": "test/installer.test.mjs",
+      "sha256": "9388cb2d0ee3211842b06b508fb33a6f847af9db95a4124889d0a9ede90a86d3",
+      "size_bytes": 27259
+    },
+    {
+      "path": "test/junction-startup.test.mjs",
+      "sha256": "a09ecda83dc07f40b3fa63d2cca9043265b68d3a281bf35620f37c9d67794f9e",
+      "size_bytes": 1770
+    },
+    {
+      "path": "test/manual.test.mjs",
+      "sha256": "6bf5d8325558cc6c1cb65510c92867a0a5d57ff78bfdfd8866cdc34ce4b361c6",
+      "size_bytes": 18615
+    },
+    {
+      "path": "test/mcp.test.mjs",
+      "sha256": "f9a58e2590c1121544f415f833cd629ca09d044dfd02d5db510a7133986f2d34",
+      "size_bytes": 49149
+    },
+    {
+      "path": "test/native-helpers.mjs",
+      "sha256": "439973c176fec577c084a9c6f2afcea953c181aeafab09a46a923bc03856b735",
+      "size_bytes": 3137
+    },
+    {
+      "path": "test/packaging.test.mjs",
+      "sha256": "acfbb992aadfc05f1ad40e6b9708dd68e7a50594d78bc70ed3b3d6443b335029",
+      "size_bytes": 11834
+    },
+    {
+      "path": "test/store-locks.test.mjs",
+      "sha256": "81db6953d3e6e976760f73e0eaf752bf70a861da80579f497db8431c3d85695a",
+      "size_bytes": 22510
+    },
+    {
+      "path": "test/store.test.mjs",
+      "sha256": "aed82f19e72588e79c72334d6a27edeae000cad47db5bfc9f58bfde38ffbf857",
+      "size_bytes": 24477
+    },
+    {
+      "path": "test/ui-protocol.test.mjs",
+      "sha256": "1004b0340c80fa8680e07918b956e128fa8b19282b42e03872558502a97e1d74",
+      "size_bytes": 4423
+    },
+    {
+      "path": "test/ui.test.mjs",
+      "sha256": "42b44c2715cd5ccb3b5cff7babaa50c2d32be1464c53d725458a673de11f91bb",
+      "size_bytes": 20053
+    },
+    {
+      "path": "ui/bridge.html",
+      "sha256": "30f5e75525210dff8131b316b68e051bb24ff9cb4c49b6440676dd91b34d1274",
+      "size_bytes": 49513
+    }
+  ],
+  "standalone_regression_test": {
+    "filename": "junction-startup.test.mjs",
+    "sha256": "a09ecda83dc07f40b3fa63d2cca9043265b68d3a281bf35620f37c9d67794f9e"
+  },
+  "verification": {
+    "date": "2026-10-05 Asia/Seoul",
+    "environment": "Windows; isolated extracted source copy",
+    "manifests": "passed",
+    "tests": {
+      "total": 198,
+      "passed": 198,
+      "failed": 0,
+      "skipped": 0
+    },
+    "archive_and_file_hashes": "passed",
+    "patch_application_to_pinned_source": "passed",
+    "application_reinstallation_performed": false,
+    "new_environment_live_roundtrip": "requires user-side restoration verification"
+  }
+}
