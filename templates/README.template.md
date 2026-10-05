@@ -82,3 +82,12 @@ DOLLARS-WALKTHROUGH-REGISTRATION:END -->
 
 본 패치는 팬 제작 비공식 한국어 패치이며 게임 원본 파일을 포함하지 않습니다.
 원작 및 관련 콘텐츠의 저작권과 상표권은 각 권리자에게 있습니다.
+
+<!-- DOLLARS-LOCALIZATION-PROCESS:START -->
+## 한글패치 작업 안내
+
+[Codex·GPT 공통 작업순서](https://github.com/Dollars-Archive/Dollars-Archive-kr-localization-archive/blob/main/CODEX-LOCALIZATION-BOOTSTRAP.md) · [공통 지시문](https://github.com/Dollars-Archive/Dollars-Archive-kr-localization-archive/blob/main/templates/PROJECT-INSTRUCTIONS.md)
+
+<!-- 새 프로젝트 생성 시 아래 상대 링크의 시작하기.md를 실제로 만들고 게임별 자료·진행상태 링크를 연결한다. 비공개 Drive 링크는 공개하지 않는다. -->
+[이 게임 작업 시작하기](시작하기.md)
+<!-- DOLLARS-LOCALIZATION-PROCESS:END -->
