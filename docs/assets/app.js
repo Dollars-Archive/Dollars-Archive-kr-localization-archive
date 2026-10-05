@@ -48,9 +48,15 @@ function viewerUrl(file) {
 }
 
 function renderIndex() {
-  const grid = document.getElementById('doc-grid');
-  if (!grid) return;
-  grid.innerHTML = docs.map((doc) => `
+  const sections = [
+    { id: 'doc-grid', files: ['GPT-GITHUB-OPERATIONS.md', 'CODEX-LOCALIZATION-BOOTSTRAP.md', 'workflow/CODEX-CLAUDE-TEAM-RECOVERY.md'] },
+    { id: 'operations-grid', files: ['workflow/PUBLIC-WORKLOG-STANDARD.md', 'workflow/GITHUB-PAGES-INSTALL-GUIDE-STANDARD.md'] },
+    { id: 'platform-grid', files: ['switch/SWITCH-KOREAN-LOCALIZATION-GUIDE.md'] },
+  ];
+  for (const section of sections) {
+    const grid = document.getElementById(section.id);
+    if (!grid) continue;
+    grid.innerHTML = section.files.map((file) => docs.find((doc) => doc.file === file)).map((doc) => `
     <a class="doc-card" href="${viewerUrl(doc.file)}">
       <div class="kicker">${doc.group}</div>
       <h3>${doc.title}</h3>
@@ -58,6 +64,7 @@ function renderIndex() {
       <div class="path">${doc.file}</div>
     </a>
   `).join('');
+  }
 }
 
 function slugify(text) {

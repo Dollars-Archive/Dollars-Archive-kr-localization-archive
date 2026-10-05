@@ -371,7 +371,22 @@ DevSpace는 로컬 코드/파일 작업, GitHub는 원격 저장소/README/Relea
 
 ---
 
-## 13. 최종 체크리스트
+## 13. 웹 설치 가이드 / GitHub Pages 작업
+
+설치 가이드를 새로 만들거나 정비할 때는 먼저 **[GitHub Pages 설치 가이드 표준](workflow/GITHUB-PAGES-INSTALL-GUIDE-STANDARD.md)**을 읽습니다. 복제할 실제 파일은 **[공통 Pages 템플릿](templates/pages-install-guide/README.md)**에 있습니다.
+
+1. README·INSTALL.md·Release와 기존 Pages 설정을 조회합니다.
+2. 파일 쓰기와 Pages 설정 권한을 각각 확인합니다. 권한 거부는 우회하지 않습니다.
+3. 기존 사이트·도메인·게시 브랜치·Actions를 유지하고 필요한 파일만 수정합니다.
+4. INSTALL.md 원본 직접 읽기인지, 배포 사본과 동기화 workflow를 사용하는지 확인합니다.
+5. 공개 커밋의 Pages 배포 성공과 실제 웹 본문·상대 이미지·Release 링크를 확인합니다.
+6. **배포 확인 후** README와 해당 Release의 설치 링크를 바꾸고 재조회합니다.
+
+Pages 생성·설정 변경은 파일 쓰기 권한만으로 보장되지 않습니다. 직접 연결 도구 또는 인증된 CLI/API를 우선 사용하며, API 권한 거부를 Actions로 우회하지 않습니다. 사이트가 아직 준비되지 않았다면 공개 링크부터 바꾸지 않습니다.
+
+---
+
+## 14. 최종 체크리스트
 
 - [ ] 실제 저장소를 조회했는가
 - [ ] 대상 파일 또는 Release를 먼저 읽었는가

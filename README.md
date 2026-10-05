@@ -14,6 +14,8 @@
 
 ## 문서 목록
 
+웹 대문은 **핵심 문서 3개**(GitHub 작업·부트스트랩·팀 복구), **운영 표준 2개**(작업일지·Pages 설치 가이드), **기종별 기술 문서**(Nintendo Switch)로 나눕니다. 문서는 모두 유지합니다.
+
 ### GPT / GitHub 운용
 
 - [GPT → GitHub 작업 가이드](https://dollars-archive.github.io/Dollars-Archive-kr-localization-archive/doc.html?file=GPT-GITHUB-OPERATIONS.md)
@@ -43,7 +45,8 @@
   - README와 최신 Release의 설치 링크를 Pages로 연결
   - 공통 레이아웃 + 게임별 포인트 컬러 테마
   - 목차·경고 박스·코드 복사·모바일·다크모드 공통 기능
-  - `main /docs` 배포와 Pages build 검증
+  - 기존 게시 설정 보존, 실제 Pages 배포 확인 후 공개 링크 전환
+  - [복제할 설치 페이지 템플릿](templates/pages-install-guide/README.md)
   - 새 게임 저장소에 재사용하는 기본 체크리스트
 
 ### Nintendo Switch 한국어 패치
