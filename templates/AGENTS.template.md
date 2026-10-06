@@ -74,11 +74,13 @@ Drive 검수는 [공통 양식](https://github.com/Dollars-Archive/Dollars-Archi
 ## Public Patch README Form
 
 아래 Dollars-Archive 허브·공략집 연결은 작성자 운영용이다. 다른 사용자는 본인 저장소용으로 수정하거나 생략하고 작성자 저장소에 게시하지 않는다.
-### 새 패치 저장소의 공략집 등록 안내
+### 새 패치 저장소의 숨김 공략집 지침
 
-신규 공개 패치 저장소 생성은 README의 공략집 등록 지침 연결까지 포함합니다. `templates/README.template.md`의 안내를 보존하고 `REPOSITORY_NAME`을 실제 저장소 이름으로 바꿉니다. `templates/ensure_guide_registration.py`를 `.github/scripts/ensure_guide_registration.py`, `templates/guide-registration.yml`을 `.github/workflows/guide-registration.yml`로 함께 복사합니다. 첫 커밋 전에 `python .github/scripts/ensure_guide_registration.py --repo Dollars-Archive/실제저장소이름`을 실행합니다.
+공開 README에 `직접 만든 공략집 등록 안내` 또는 REGISTER-GUIDE.md 등록 절차 링크를 보이는 문구·버튼으로 생성하거나 복원하지 않는다. 등록 지침 URL과 patch_repo는 `DOLLARS-WALKTHROUGH-REGISTRATION` HTML 주석 안에만 보존한다. 실제 공략집 열기·다운로드 링크와 모음집의 공략집 체크는 유지한다.
 
-워크플로는 기본 브랜치 푸시와 수동 실행 때 누락된 연결만 자동으로 추가합니다. 기존 안내가 있으면 아무것도 변경하지 않습니다. 신규 저장소 생성 완료 전에 지침 주소·patch_repo·워크플로 실행 성공을 확인하며, 사용자가 따로 지침을 첨부하도록 요구하지 않습니다. 공략 등록 요청은 https://github.com/Dollars-Archive/Game-Walkthrough-Archive/blob/main/REGISTER-GUIDE.md 를 직접 읽고 처리합니다. 별도 PAT 없이 자기 저장소의 GITHUB_TOKEN을 사용합니다. 세부 절차는 `workflow/PATCH-README-STANDARD.md`에 있습니다.
+신규 공개 패치 저장소 생성은 README의 공략집 등록 지침 연결까지 포함합니다. `templates/README.template.md`의 HTML 주석 안 지침만 보존하고 `REPOSITORY_NAME`을 실제 저장소 이름으로 바꿉니다. `templates/ensure_guide_registration.py`를 `.github/scripts/ensure_guide_registration.py`, `templates/guide-registration.yml`을 `.github/workflows/guide-registration.yml`로 함께 복사합니다. 첫 커밋 전에 `python .github/scripts/ensure_guide_registration.py --repo Dollars-Archive/실제저장소이름`을 실행합니다.
+
+워크플로는 기본 브랜치 푸시와 수동 실행 때 누락된 연결만 자동으로 추가합니다. 숨김 지침은 보존하며 보이는 등록 안내가 남아 있으면 제거합니다. 올바른 문서는 다시 변경하지 않습니다. 신규 저장소 생성 완료 전에 지침 주소·patch_repo·워크플로 실행 성공을 확인하며, 사용자가 따로 지침을 첨부하도록 요구하지 않습니다. 공략 등록 요청은 https://github.com/Dollars-Archive/Game-Walkthrough-Archive/blob/main/REGISTER-GUIDE.md 를 직접 읽고 처리합니다. 별도 PAT 없이 자기 저장소의 GITHUB_TOKEN을 사용합니다. 세부 절차는 `workflow/PATCH-README-STANDARD.md`에 있습니다.
 
 
 공개 패치 저장소의 대문을 만들 때 canonical bootstrap의 `templates/README.template.md`를 사용합니다. 게임 정보 표에는 개발사·장르·발매일·플레이타임을 포함합니다. `타이틀 한글화 / 메뉴·UI / 대사 / 이미지 번역 / 동영상 자막`의 다섯 제목과 각 항목의 숨김 주석 `kr-patch:state:`를 유지합니다. 공개 상태 문구는 추가하거나 복원하지 않습니다. 완료·일부·미작업·해당 없음으로 명시하고 근거 없는 완료 표시를 하지 않습니다. README의 표와 상태가 허브의 입력 원본이며 `kr-patch:game-info:v1`, `kr-patch:scope:v1` 주석을 보존합니다. 실제 패치 저장소에는 kr-patch topic을 붙이고 후보 조사 아카이브에는 붙이지 않습니다. 게임 정보·현재 범위를 허브 patches.yml에 중복 입력하지 않습니다. 세부 규칙은 `workflow/PATCH-README-STANDARD.md`를 읽습니다. 기존 README 변경 전 백업하고 이미지·호환성·설치 정보를 보존합니다.

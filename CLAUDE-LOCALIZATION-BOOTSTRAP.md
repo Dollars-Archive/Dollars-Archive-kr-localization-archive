@@ -1,5 +1,9 @@
 # 한글패치 준비부터 배포까지 — Claude 담당자·Codex 외주
 
+## 공개 README의 공략집 안내
+
+공開 README에 `직접 만든 공략집 등록 안내` 또는 REGISTER-GUIDE.md 등록 절차 링크를 보이는 문구·버튼으로 생성하거나 복원하지 않는다. 등록 지침 URL과 patch_repo는 `DOLLARS-WALKTHROUGH-REGISTRATION` HTML 주석 안에만 보존한다. 실제 공략집 열기·다운로드 링크와 모음집의 공략집 체크는 유지한다.
+
 **Claude가 프로젝트를 관리하고 대부분의 실제 작업을 한다. Codex는 Claude에게 의뢰받은 테스트 ROM·패처를 직접 만들어 돌려준다. 대사 1·2·3차 검수는 Google Drive의 웹 GPT가 맡는다.**
 
 사용자가 이 운영 방식을 선택한 프로젝트에 적용한다. 날짜가 됐다는 이유로 자동 전환하지 않는다. 기존 [Codex용 부트스트랩](CODEX-LOCALIZATION-BOOTSTRAP.md)은 별도 방식으로 유지한다. 전환을 요청받은 기존 프로젝트는 현재 단계·성공 자료·사용자 확정값을 이어받는다.
