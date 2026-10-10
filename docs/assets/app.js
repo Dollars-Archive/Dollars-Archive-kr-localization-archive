@@ -1,7 +1,7 @@
 import { sanitizeMarkdownPath, resolveRepoPath } from './core.js';
 
 const REPO = 'Dollars-Archive/Dollars-Archive-kr-localization-archive';
-const RAW_BASE = `https://raw.githubusercontent.com/${REPO}/main/`;
+const RAW_BASE = `https://raw.githubusercontent.com/${REPO}/refs/heads/main/`;
 const BLOB_BASE = `https://github.com/${REPO}/blob/main/`;
 
 const docs = [
