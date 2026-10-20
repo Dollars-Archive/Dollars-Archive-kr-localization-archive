@@ -28,7 +28,7 @@
 ### Codex 한글화 프로젝트 운영
 
 - [Codex 한글화 프로젝트 부트스트랩](https://dollars-archive.github.io/Dollars-Archive-kr-localization-archive/doc.html?file=CODEX-LOCALIZATION-BOOTSTRAP.md)
-  - Codex·GPT 공통 16단계, 진행상태 기록과 사용자 실기 확인
+  - Codex·GPT 공통 15단계, 진행상태 기록과 사용자 실기 확인
   - 1차 용어 선확정 → 2차 원문 본번역 → 3차 독립 검수 → 4차 줄바꿈·공란·일본어 잔존 확인 (2·3·4차 최대 500논리행)
   - [Google Drive 공통 양식](templates/drive-review/README.md): 전체 지시문과 빈 CSV
   - [프로젝트 공통 지시문](templates/PROJECT-INSTRUCTIONS.md) / [진행상태 양식](templates/진행상태.template.md)
