@@ -29,7 +29,7 @@
 
 - [Codex 한글화 프로젝트 부트스트랩](https://dollars-archive.github.io/Dollars-Archive-kr-localization-archive/doc.html?file=CODEX-LOCALIZATION-BOOTSTRAP.md)
   - Codex·GPT 공통 16단계, 진행상태 기록과 사용자 실기 확인
-  - 모든 차수 500행: 1차 번역 → 2차 화자·관계·용어 → 3차 출력 규격·말투 반영
+  - 1차 용어 선확정 → 2차 원문 본번역 → 3차 독립 검수 → 4차 줄바꿈·공란·일본어 잔존 확인 (2·3·4차 최대 500논리행)
   - [Google Drive 공통 양식](templates/drive-review/README.md): 전체 지시문과 빈 CSV
   - [프로젝트 공통 지시문](templates/PROJECT-INSTRUCTIONS.md) / [진행상태 양식](templates/진행상태.template.md)
 
@@ -37,7 +37,7 @@
 
 - [Claude 한글화 프로젝트 부트스트랩](https://dollars-archive.github.io/Dollars-Archive-kr-localization-archive/doc.html?file=CLAUDE-LOCALIZATION-BOOTSTRAP.md)
   - Claude가 진행 관리·실제 구현을 맡고 Codex에 테스트 ROM·패처 제작을 의뢰
-  - Google Drive 웹 GPT의 대사 1·2·3차 검수와 기존 실기 확인 순서 유지
+  - Google Drive의 1차 용어 선확정·2차 본번역·3차 독립 검수·4차 출력 검수와 기존 실기 확인 순서 유지
   - 선택한 프로젝트에서만 적용, 기존 Codex 운영 방식과 자동 전환 없음
 
 ### 공개 작업일지
